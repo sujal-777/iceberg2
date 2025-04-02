@@ -20,7 +20,7 @@ export default function Navbar() {
                 width={140}
                 height={50}
                 alt="logo"
-                className="object-cover pt-4 pl-6"
+                className="object-cover"
               />
             </Link>
           </div>
