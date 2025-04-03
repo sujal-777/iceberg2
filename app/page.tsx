@@ -1,9 +1,9 @@
 import Header from "@/components/home/Header"
 import TestimonialCarousel from "@/components/home/testimonial"
 import FacultyShowcase from "@/components/home/faculty"
-import TestSeries from "@/components/TestSeries"
-import AboutUs from "@/components/about-us"
-import ContactUs from "@/components/Contact-Us"
+import TestSeries from "@/components/home/TestSeries"
+import AboutUs from "@/components/home/about-us"
+import ContactUs from "@/components/home/Contact-Us"
 export default function Home() {
   return (
     <>
