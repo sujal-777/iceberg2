@@ -2,17 +2,15 @@ import Image from "next/image";
 
 export default function TestSeries() {
   return (
-    <div className="bg-[#EEF6FF] min-h-screen flex flex-col items-center py-10">
-      <h1 className="text-2xl font-semibold text-black mb-6">
-        Test Series Showcase
-      </h1>
+    <div className="bg-[#EEF6FF] min-h-screen flex flex-col items-center py-6">
+      <h1 className="text-4xl font-bold text-black mb-4">Test Series Showcase</h1>
 
-      <div className="flex space-x-4 mb-8">
+      <div className="flex space-x-6 mb-6">
         {["CA TEST SERIES", "CS TEST SERIES", "CMA TEST SERIES"].map(
           (category) => (
             <button
               key={category}
-              className="bg-white text-black font-medium px-6 py-2 rounded-full shadow-md hover:bg-gray-200 transition"
+              className="bg-white text-black text-lg font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-200 transition"
             >
               {category}
             </button>
@@ -20,21 +18,21 @@ export default function TestSeries() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[1, 2, 3].map((index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-lg overflow-hidden w-70"
+            className="bg-white rounded-xl shadow-xl overflow-hidden w-80"
           >
             <div className="p-6 flex justify-center">
               <Image
                 src="/CALogo.png"
                 alt="CA India Logo"
-                width={120}
-                height={120}
+                width={150} 
+                height={150} 
               />
             </div>
-            <div className="bg-[#0052CC] text-white text-center py-3 font-semibold">
+            <div className="bg-[#0052CC] text-white text-center py-4 text-lg font-bold">
               CA Foundation Exam
             </div>
           </div>

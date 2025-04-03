@@ -58,7 +58,7 @@ export default function Contact() {
           <iframe 
             src="https://forms.zohopublic.in/temp77261gm1/form/ContactUs/formperma/0AfcmeoQrO6xqt_X4H_SZTojLn0IXMq6bzvzCEy7ZuY" 
             width="100%" 
-            height="600px" 
+            height="700px" 
             className="border-none mt-4"
             allowFullScreen>
           </iframe>

@@ -4,6 +4,7 @@ import FacultyShowcase from "@/components/home/faculty"
 import TestSeries from "@/components/TestSeries"
 import AboutUs from "@/components/about-us"
 import ContactUs from "@/components/Contact-Us"
+import FAQSection from "@/components/home/FaqSec"
 export default function Home() {
   return (
     <>
@@ -20,6 +21,7 @@ export default function Home() {
 
         <TestimonialCarousel/>
 
+        <FAQSection/>
 
         <ContactUs/>
       </main>
