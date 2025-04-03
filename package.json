@@ -9,28 +9,36 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/core": "^0.3.43",
+    "@langchain/google-genai": "^0.2.2",
     "@radix-ui/react-avatar": "^1.1.3",
     "@radix-ui/react-slot": "^1.1.2",
     "@shadcn/ui": "^0.0.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.41.0",
     "fix": "^0.0.3",
+    "langchain": "^0.3.19",
     "lucide-react": "^0.487.0",
     "next": "15.2.4",
+    "pg": "^8.14.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.1.0",
+    "tailwindcss-animate": "^1.0.7",
     "tw-animate-css": "^1.2.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "20.17.30",
+    "@types/pg": "^8.11.11",
     "@types/react": "19.1.0",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.30.6",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.1",
     "typescript": "5.8.2"
   }
 }

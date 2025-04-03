@@ -1,10 +1,19 @@
+"use client"
+import { boolean } from "drizzle-orm/gel-core";
+import IcyChat from "./chatbot";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Header() {
+  function openChatbot(){
+    setOpenChat(true)
+    
+    }
+  const [openChat,setOpenChat]=useState(false)
   return (
     <section className="w-full bg-white py-8 md:py-16 lg:py-20">
-      <div className="px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+      <div className="px-4 md:px-8 lg:px-16 max-w-7xl relative mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Left Content - Text Section */}
           <div className="w-full lg:w-1/2 text-center lg:text-left">
@@ -27,6 +36,7 @@ export default function Header() {
               >
                 Book an Appointment
               </Link>
+              {/* <IcyChat/> */}
             </div>
           </div>
 
@@ -66,6 +76,25 @@ export default function Header() {
             </div>
           </div>
         </div>
+        <div className="flex justify-end">
+
+          <div 
+          onClick={openChatbot}
+          className="w-16 h-16 rounded-full p-2 flex  bg-blue-800">
+            <Image 
+            className="rounded-full"
+            width={100}
+            height={100}
+            src="/iceberg-chat.jpeg"
+            alt="avatar"
+            />
+            {/* <h2 className="ml-2 mt-2 text-blue-500  font-medium text-xl">Icy</h2> */}
+          </div>
+        </div>
+        {
+          openChat?
+        <IcyChat setOpenChat={setOpenChat}/>:null
+        }
       </div>
     </section>
   );
