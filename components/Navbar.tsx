@@ -27,7 +27,7 @@ export default function Navbar() {
 
           {/* Main Navigation */}
           <nav className="hidden md:flex md:items-center md:space-x-8">
-            <NavLink href="/courses" text="Courses" hasDropdown />
+            <NavLink href="/" text="Home" />
             <NavLink href="/test-series" text="Test Series" />
             <NavLink href="/counseling" text="Counseling" />
             <NavLink href="/blog" text="Blog" hasDropdown />
