@@ -8,7 +8,7 @@ import FAQSection from "@/components/home/FaqSec"
 export default function Home() {
   return (
     <>
-      <main className="space-y-8 overflow-x-hidden">
+      <main className="overflow-x-hidden">
         <Header />
 
         <AboutUs/>

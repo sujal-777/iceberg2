@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function TestSeries() {
   return (
-    <div className="bg-[#EEF6FF] min-h-screen flex flex-col items-center py-6">
+    <div className="bg-[#EEF6FF] min-h-auto flex flex-col items-center py-6 pt-14 pb-64">
       <h1 className="text-4xl font-bold text-black mb-4">Test Series Showcase</h1>
 
-      <div className="flex space-x-6 mb-6">
+      <div className="flex space-x-8 mb-6">
         {["CA TEST SERIES", "CS TEST SERIES", "CMA TEST SERIES"].map(
           (category) => (
             <button

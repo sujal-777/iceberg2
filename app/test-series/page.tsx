@@ -2,6 +2,8 @@ import Image from "next/image";
 
 export default function Page() {
   return (
+    <div>
+
     <div className="flex flex-col items-center text-center">
       {/* Header Image */}
       <div className="relative w-full h-[400px] md:h-[500px] lg:h-[700px]">
@@ -25,6 +27,8 @@ export default function Page() {
           is to simplify complex concepts and help you achieve your CA dreams with confidence. 🚀
         </p>
       </div>
+
+    </div>
     </div>
   );
 }
