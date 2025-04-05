@@ -1,6 +1,6 @@
-import ContactUs from "@/app/contact-us/Contactus";
+import ContactUs from "@/components/ContactPage/Contactus";
 import FAQSection from "@/components/home/FaqSec";
-import FreeBatchesSection from "@/app/contact-us/instant"
+import FreeBatchesSection from "@/components/ContactPage/instant"
 import Contact from "@/components/home/Contact-Us"
 
 export default function PAGE() {
