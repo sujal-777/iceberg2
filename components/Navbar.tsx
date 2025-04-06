@@ -31,7 +31,7 @@ export default function Navbar() {
             <NavLink href="/test-series" text="Test Series" />
             <NavLink href="/counseling" text="Counseling" />
             <NavLink href="/blog" text="Blog" hasDropdown />
-            <NavLink href="/about-us" text="About Us" hasDropdown />
+            <NavLink href="/about-us" text="About Us"/>
             <NavLink href="/contact-us" text="Contact Us" />
           </nav>
 

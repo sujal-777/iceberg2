@@ -1,5 +1,8 @@
+import IcebergLanding from "@/components/AboutUs/about"
 export default function PAGE() {
-    return (
-        <h1>hello world</h1>
-    )
+  return (
+    <>
+    <IcebergLanding/>
+    </>
+  );
 }
