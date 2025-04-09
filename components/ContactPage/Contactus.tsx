@@ -10,7 +10,7 @@ export default function ContactUs() {
       {/* Description */}
       <p className="text-center text-gray-700 max-w-3xl mx-auto mb-8">
         At Iceberg, we are committed to helping aspiring professionals succeed in their CA, CS, and CMA journeys.
-        Whether you're looking for course details, need help with registration, or want to know more about our online
+        Whether you&apos;re looking for course details, need help with registration, or want to know more about our online
         test series, our team is just a message away.
       </p>
 

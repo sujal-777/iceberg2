@@ -16,8 +16,8 @@ export default function Discover() {
             <p className="text-sm font-medium">About ICEBERG</p>
           </div>
           <h1 className="text-white text-[30px] italic font-small font-montreal text-center max-w-2xl mb-4">
-            "Empowering Future Chartered Accountants & Cost Accountants with
-            Expert Guidance & Unmatched Test Series!"
+            Empowering Future Chartered Accountants & Cost Accountants with
+            Expert Guidance & Unmatched Test Series!
           </h1>
 
           <p

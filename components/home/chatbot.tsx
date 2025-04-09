@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { X, Send, Smile } from "lucide-react";
+import { X, Send } from "lucide-react";
 import Image from "next/image";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
@@ -23,7 +23,7 @@ const extractionQuestions = [
   "Which CA exam are you preparing for?",
 ];
 
-export default function IcyChat({setOpenChat}:{setOpenChat:any}) {
+export default function IcyChat({setOpenChat}:{setOpenChat:(open: boolean) => void}) {
   const [mode, setMode] = useState<"default" | "extraction" | "qa">("default");
   const [messages, setMessages] = useState<Message[]>([
     { sender: "agent", text: "Hello, I am July, how may I help you?" },
