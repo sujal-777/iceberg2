@@ -1,5 +1,4 @@
 "use client"
-import { boolean } from "drizzle-orm/gel-core";
 import IcyChat from "./chatbot";
 import Image from "next/image";
 import Link from "next/link";
