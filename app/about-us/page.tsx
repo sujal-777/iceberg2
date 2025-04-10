@@ -8,6 +8,7 @@ export default function AboutUs() {
       <Discover />
       <Mission />
       <Founder />
+      
     </main>
   );
 }

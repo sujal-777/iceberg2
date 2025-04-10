@@ -5,12 +5,12 @@ export default function ContactUs() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       {/* Header */}
-      <h1 className="text-4xl font-bold text-center mb-6">Contact Us</h1>
+      <h1 className="text-4xl font-medium text-center mb-8 font-neue text-[64px]">Contact Us</h1>
 
       {/* Description */}
-      <p className="text-center text-gray-700 max-w-3xl mx-auto mb-8">
+      <p className="text-[#696969] text-center font-neue text-[24px] font-normal leading-normal  mx-auto">
         At Iceberg, we are committed to helping aspiring professionals succeed in their CA, CS, and CMA journeys.
-        Whether you&apos;re looking for course details, need help with registration, or want to know more about our online
+        Whether you're looking for course details, need help with registration, or want to know more about our online
         test series, our team is just a message away.
       </p>
 
@@ -20,10 +20,10 @@ export default function ContactUs() {
       {/* Contact Information and Map */}
       <div className="flex flex-col md:flex-row gap-8">
         {/* Contact Information */}
-        <div className="md:w-1/3">
-          <h2 className="text-3xl font-bold mb-4">ICEBERG</h2>
-          <p className="font-medium mb-1">Iceberg Coaching Center</p>
-          <address className="not-italic text-gray-700 mb-4">
+        <div className="flex w-[297px] flex-col items-start gap-[40px]">
+        <h2 className="text-black font-[Neue Montreal] text-[72px] not-italic font-medium leading-none tracking-[-0.09em]">ICEBERG</h2>
+          <p  className="text-[#484848] font-inter text-[24px] not-italic font-semibold leading-none tracking-[-0.03em]">Iceberg Coaching Center</p>
+          <address className="text-[#484848] font-inter text-[24px] not-italic font-normal leading-none tracking-[-0.03em]">
             123 Knowledge Street,
             <br />
             Dehradun, Uttarakhand 248001
