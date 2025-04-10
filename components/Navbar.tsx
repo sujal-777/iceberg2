@@ -44,7 +44,7 @@ export default function Navbar() {
               Log in
             </Link>
             <Link
-              href="/get-started"
+              href="/test-series"
               className="rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
             >
               Get Started
@@ -83,7 +83,7 @@ export default function Navbar() {
               Log in
             </Link>
             <Link
-              href="/get-started"
+              href="/test-series"
               className="block w-full rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white"
             >
               Get Started
