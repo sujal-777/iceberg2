@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="w-full bg-white shadow-sm">
         <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20"> {/* Increased height */}
           {/* Logo */}
-          <div className="flex-shrink-0 pt-2 pl-4">
+          <div className="flex-shrink-0 pt-2 pl-2">
             <Link href="/">
               <Image
                 src="/logo-top.png"
