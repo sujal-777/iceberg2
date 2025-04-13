@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Star } from "lucide-react";
 
 export default function AboutUs() {
   return (
@@ -19,8 +18,8 @@ export default function AboutUs() {
               <p className="text-sm font-medium">About ICEBERG</p>
             </div>
             <h1 className="text-white text-2xl sm:text-[30px] italic font-light max-w-2xl mb-4">
-              "Empowering Future Chartered Accountants & Cost Accountants with
-              Expert Guidance & Unmatched Test Series!"
+              &quot;Empowering Future Chartered Accountants & Cost Accountants with
+              Expert Guidance & Unmatched Test Series!&quot;
             </h1>
             <p className="text-white text-lg sm:text-xl font-normal tracking-wide max-w-3xl" style={{ fontFamily: "Neue Montreal" }}>
               ICEBERG is a CA & CMA test series platform designed to help

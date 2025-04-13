@@ -10,10 +10,9 @@ export default function ContactUs() {
       {/* Description */}
       <p className="text-[#696969] text-center font-neue text-[24px] font-normal leading-normal  mx-auto">
         At Iceberg, we are committed to helping aspiring professionals succeed in their CA, CS, and CMA journeys.
-        Whether you're looking for course details, need help with registration, or want to know more about our online
+        Whether you&apos;re looking for course details, need help with registration, or want to know more about our online
         test series, our team is just a message away.
       </p>
-
       {/* Divider */}
       <div className="border-t border-gray-200 my-8"></div>
 
