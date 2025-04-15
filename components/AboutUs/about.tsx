@@ -60,6 +60,7 @@ export default function AboutUs() {
   </div>
 </section>
 
+
       {/* Founder Section */}
       <section className="py-16 px-4 bg-white">
         <h2 className="text-3xl font-bold text-center mb-12">Our Founder</h2>
