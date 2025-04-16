@@ -14,7 +14,7 @@ class CAForm extends Component {
             <iframe
               aria-label="Counseling Intake Form"
               frameBorder="0"
-              className="w-full h-[500px]"
+              className="w-full h-[1700px]"
               src="https://forms.zohopublic.in/temp77261gm1/form/CounselingIntakeForm/formperma/U9q8YZ-LpdEPwFkmLkldYrJatyuC10xevOFfSIlUA1U"
               allowFullScreen
             ></iframe>
