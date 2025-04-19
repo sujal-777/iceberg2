@@ -22,34 +22,35 @@ export default function Contact() {
           </div>
 
           {/* Horizontal Cards Section */}
-          <div className="mt-5 flex flex-wrap gap-4">
-            {/* Student Support */}
-            <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
-              <h3 className="font-semibold text-gray-800">Student Support</h3>
-              <p className="text-sm text-gray-600 mt-2">
-                Our team is here 24/7 to assist you with test series, counseling, or exam strategies.
-              </p>
-            </div>
+<div className="mt-5 flex flex-wrap md:flex-nowrap gap-4">
+  {/* Student Support */}
+  <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
+    <h3 className="font-semibold text-gray-800">Student Support</h3>
+    <p className="text-sm text-gray-600 mt-2">
+      Our team is here 24/7 to assist you with test series, counseling, or exam strategies.
+    </p>
+  </div>
 
-            {/* Feedback and Suggestions */}
-            <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
-              <h3 className="font-semibold text-gray-800">Feedback & Suggestions</h3>
-              <p className="text-sm text-gray-600 mt-2">
-                Your feedback helps us improve! Share your thoughts to make ICEBERG even better.
-              </p>
-            </div>
+  {/* Feedback and Suggestions */}
+  <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
+    <h3 className="font-semibold text-gray-800">Feedback & Suggestions</h3>
+    <p className="text-sm text-gray-600 mt-2">
+      Your feedback helps us improve! Share your thoughts to make ICEBERG even better.
+    </p>
+  </div>
 
-            {/* Success Stories */}
-            <div className="bg-white p-6 rounded-lg  w-full md:w-1/3">
-              <h3 className="font-semibold text-gray-800">Success Stories</h3>
-              <p className="text-sm text-gray-600 mt-2">
-                Have ICEBERG’s test series helped you? Share your experience at  
-                <a href="mailto:success@icebergexams.com" className="text-blue-600">
-                  {" "}success@icebergexams.com
-                </a>.
-              </p>
-            </div>
-          </div>
+  {/* Success Stories */}
+  <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
+    <h3 className="font-semibold text-gray-800">Success Stories</h3>
+    <p className="text-sm text-gray-600 mt-2">
+      Have ICEBERG’s test series helped you? Share your experience at  
+      <a href="mailto:success@icebergexams.com" className="text-blue-600">
+        {" "}success@icebergexams.com
+      </a>.
+    </p>
+  </div>
+</div>
+
         </div>
 
         {/* Right Section - Zoho Form Embed */}
