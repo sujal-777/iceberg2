@@ -21,10 +21,10 @@ export default function Contact() {
             </a>
           </div>
 
-          {/* Horizontal Cards Section */}
+{/* Horizontal Cards Section */}
 <div className="mt-5 flex flex-wrap md:flex-nowrap gap-4">
   {/* Student Support */}
-  <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
+  <div className="bg-white p-6 rounded-lg w-full md:w-1/3 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition">
     <h3 className="font-semibold text-gray-800">Student Support</h3>
     <p className="text-sm text-gray-600 mt-2">
       Our team is here 24/7 to assist you with test series, counseling, or exam strategies.
@@ -32,7 +32,7 @@ export default function Contact() {
   </div>
 
   {/* Feedback and Suggestions */}
-  <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
+  <div className="bg-white p-6 rounded-lg w-full md:w-1/3 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition">
     <h3 className="font-semibold text-gray-800">Feedback & Suggestions</h3>
     <p className="text-sm text-gray-600 mt-2">
       Your feedback helps us improve! Share your thoughts to make ICEBERG even better.
@@ -40,7 +40,7 @@ export default function Contact() {
   </div>
 
   {/* Success Stories */}
-  <div className="bg-white p-6 rounded-lg w-full md:w-1/3">
+  <div className="bg-white p-6 rounded-lg w-full md:w-1/3 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition">
     <h3 className="font-semibold text-gray-800">Success Stories</h3>
     <p className="text-sm text-gray-600 mt-2">
       Have ICEBERG’s test series helped you? Share your experience at  
@@ -50,6 +50,7 @@ export default function Contact() {
     </p>
   </div>
 </div>
+
 
         </div>
 
