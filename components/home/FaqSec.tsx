@@ -70,11 +70,14 @@ export default function FAQSection() {
             </button>
 
             {/* Show answer only if the question is expanded */}
-            {openIndex === index && (
-              <div className="px-6 pb-4 text-gray-700 text-md">
-                {faq.answer}
-              </div>
-            )}
+            <div
+  className={`px-6 text-gray-700 text-md transition-all duration-300 ease-in-out overflow-hidden ${
+    openIndex === index ? "max-h-[300px] opacity-100 pb-4" : "max-h-0 opacity-0 pb-0"
+  }`}
+>
+  <div className="pt-2">{faq.answer}</div>
+</div>
+
           </div>
         ))}
       </div>
