@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AboutUs() {
   return (
-    <div className="bg-[#EEF6FF]  min-h-auto flex justify-center items-center px-8">
+    <div className="bg-[#EEF6FF] min-h-auto flex justify-center items-center px-[200px]">
       <div className="max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-20 items-center mt-20 mb-52">
         {/* Left Side - Single Image */}
         <div className="relative w-full flex -left-1/12">
