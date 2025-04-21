@@ -11,9 +11,9 @@ export default function Navbar() {
   return (
     <div className="w-full pb-6"> {/* Increased bottom padding */}
       <div className="w-full bg-white shadow-sm">
-        <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20"> {/* Increased height */}
+        <div className="flex h-20 items-center justify-between px-4 md:px-12 lg:px-20"> {/* Increased height */}
           {/* Logo */}
-          <div className="flex-shrink-0 pt-2 pl-2">
+          <div className="flex-shrink-0 pt-2">
             <Link href="/">
               <Image
                 src="/logo-top.png"
@@ -28,9 +28,9 @@ export default function Navbar() {
           {/* Main Navigation */}
           <nav className="hidden md:flex md:items-center md:space-x-8">
             <NavLink href="/" text="Home" />
-            <NavLink href="/test-series" text="Test Series" />
+            <NavLink href="/test-series" text="Test Series" hasDropdown />
             <NavLink href="/counseling" text="Counseling" />
-            <NavLink href="/blog" text="Blog" hasDropdown />
+            <NavLink href="/blog" text="Blog" />
             <NavLink href="/about-us" text="About Us"/>
             <NavLink href="/contact-us" text="Contact Us" />
           </nav>

@@ -50,6 +50,7 @@ export default function Footer() {
             {/* Quick Links */}
             <div>
               <h3 className="text-lg font-semibold">Quick Links</h3>
+              <br />
 
               <ul className="space-y-2">
                 <li>
@@ -78,6 +79,7 @@ export default function Footer() {
             {/* Company */}
             <div>
               <h3 className="text-lg font-semibold">Company</h3>
+              <br />
               <ul className="space-y-2">
                 <li>
                   <Link href="/about" className="text-gray-600 hover:text-blue-500">
@@ -110,6 +112,7 @@ export default function Footer() {
             {/* Support */}
             <div>
               <h3 className="text-lg font-semibold">Support</h3>
+              <br />
               <ul className="space-y-2">
                 <li>
                   <Link href="#" className="text-gray-600 hover:text-blue-500">
@@ -132,6 +135,7 @@ export default function Footer() {
             {/* Contact Us */}
             <div>
               <h3 className="text-lg font-semibold">Contact Us</h3>
+              <br />
               <ul className="space-y-2">
                 <li className="flex items-center gap-2">
                   <Mail size={16} className="text-gray-600" />
