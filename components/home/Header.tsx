@@ -1,5 +1,5 @@
 "use client"
-import IcyChat from "./chatbot";
+// import IcyChat from "./chatbot";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -159,7 +159,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
 
           <div 
           onClick={openChatbot}
@@ -172,12 +172,12 @@ export default function Header() {
             alt="avatar"
             />
             {/* <h2 className="ml-2 mt-2 text-blue-500  font-medium text-xl">Icy</h2> */}
-          </div>
+          {/* </div>
         </div>
         {
           openChat?
         <IcyChat setOpenChat={setOpenChat}/>:null
-        }
+        } */} 
       </div>
     </section>
   )
