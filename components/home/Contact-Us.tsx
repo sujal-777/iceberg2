@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Contact() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-[200px] bg-white">
-      <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-20 xl:px-32 2xl:px-40 bg-white">
+      <div className="w-full max-w-[1800px] grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         
         {/* Left Section - Contact Information */}
         <div className="text-black w-full">
