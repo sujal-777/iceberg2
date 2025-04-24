@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useState } from "react";
 import IcyChat from "@/components/home/chatbot";
@@ -18,8 +18,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Main layout container */}
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main className="overflow-x-hidden w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <Header />
         <AboutUs />
         <TestSeries />
