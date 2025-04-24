@@ -3,14 +3,16 @@ import Image from "next/image";
 export default function TestSeries() {
   return (
     <div className="bg-[#EEF6FF] min-h-auto flex flex-col items-center py-6 pt-14 pb-64">
-      <h1 className="text-4xl font-bold text-black mb-4">Test Series Showcase</h1>
+      <h1 className="text-3xl sm:text-4xl font-bold text-black mb-4 text-center">
+        Test Series Showcase
+      </h1>
 
-      <div className="flex space-x-8 mb-6">
+      <div className="flex flex-wrap justify-center space-x-8 mb-6">
         {["CA TEST SERIES", "CS TEST SERIES", "CMA TEST SERIES"].map(
           (category) => (
             <button
               key={category}
-              className="bg-white text-black text-lg font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-200 transition"
+              className="bg-white text-black text-lg font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-gray-200 transition mb-4 sm:mb-0"
             >
               {category}
             </button>
@@ -18,7 +20,7 @@ export default function TestSeries() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {[1, 2, 3].map((index) => (
           <div
             key={index}
@@ -28,8 +30,9 @@ export default function TestSeries() {
               <Image
                 src="/CALogo.png"
                 alt="CA India Logo"
-                width={150} 
-                height={150} 
+                width={150}
+                height={150}
+                className="object-contain"
               />
             </div>
             <div className="bg-[#0052CC] text-white text-center py-4 text-lg font-bold">

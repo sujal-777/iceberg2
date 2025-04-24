@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function OurMission() {
   return (
-    <section className="bg-[#F5FAFF] py-20 px-8 sm:px-20 rounded-2xl mx-auto w-full max-w-[1600px]">
+    <section className="bg-[#F5FAFF] py-20 px-8 sm:px-20 rounded-2xl w-full max-w-[1600px] mx-[100px]">
       <div className="flex flex-col md:flex-row items-center justify-between gap-16">
         {/* Text Content */}
         <div className="md:w-1/2">
