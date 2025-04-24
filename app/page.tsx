@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <>
       {/* Main layout container */}
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main className="overflow-hidden">
         <Header />
         <AboutUs />
         <TestSeries />
