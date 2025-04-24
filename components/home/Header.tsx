@@ -1,16 +1,10 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+// import { useState } from "react";
 import { Button } from "@/components/ui/button";
 // import IcyChat from "./chatbot"; 
 
 export default function Header() {
-  const [openChat, setOpenChat] = useState(false);
-
-  function openChatbot() {
-    setOpenChat(true);
-  }
-
   return (
     <section className="w-full bg-white py-12 md:py-16 lg:py-20">
       <div className="px-4 sm:px-6 md:px-12 lg:px-20 xl:px-[200px]">
@@ -67,23 +61,6 @@ export default function Header() {
                 />
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Chatbot Avatar Button */}
-        <div className="flex justify-end mt-10">
-          <div
-            onClick={openChatbot}
-            className="w-14 h-14 sm:w-16 sm:h-16 rounded-full p-1.5 flex items-center justify-center bg-blue-800 cursor-pointer hover:scale-105 transition-all duration-200"
-          >
-            <Image
-              className="rounded-full"
-              width={64}
-              height={64}
-              src="/iceberg-chat.jpeg"
-              alt="avatar"
-            />
-        
           </div>
         </div>
       </div>

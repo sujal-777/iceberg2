@@ -5,11 +5,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
   ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
+  // SignedIn,
+  // SignedOut,
+  // SignInButton,
+  // SignUpButton,
+  // UserButton,
 } from "@clerk/nextjs";
 
 const geistSans = Geist({
