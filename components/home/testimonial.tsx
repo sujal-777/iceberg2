@@ -7,7 +7,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
-// Sample testimonial data
 const testimonials = [
   {
     id: 1,
@@ -56,12 +55,14 @@ export default function TestimonialCarousel() {
 
   return (
     <div className="w-full py-16 bg-[#e6f7f2]">
-      <div className="container max-w-6xl mx-auto px-4">
+      <div className="container max-w-6xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="text-center mb-4">
-          <p className="text-blue-600 text-sm font-medium uppercase tracking-wider">STUDENT TESTIMONIALS</p>
+          <p className="text-blue-600 text-xs sm:text-sm font-medium uppercase tracking-wider">
+            STUDENT TESTIMONIALS
+          </p>
         </div>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 leading-tight">
           See How ICEBERG Transformed Students&apos; Exam Journeys
         </h2>
 
@@ -69,9 +70,9 @@ export default function TestimonialCarousel() {
           <Card className="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
             <CardContent className="p-0">
               <div className="flex flex-col md:flex-row">
-                {/* Video thumbnail with play button */}
+                {/* Image or video thumbnail */}
                 <div className="relative w-full md:w-2/5">
-                  <div className="aspect-square relative">
+                  <div className="aspect-square md:aspect-[4/3] relative">
                     <Image
                       src={currentTestimonial.image || "/placeholder.svg"}
                       alt={`${currentTestimonial.name}'s testimonial`}
@@ -88,11 +89,11 @@ export default function TestimonialCarousel() {
                 </div>
 
                 {/* Testimonial content */}
-                <div className="w-full md:w-3/5 p-6">
+                <div className="w-full md:w-3/5 p-6 sm:p-8">
                   <div className="h-full flex flex-col">
                     <div className="flex-grow">
                       {currentTestimonial.content.split("\n\n").map((paragraph, i) => (
-                        <p key={i} className="text-gray-700 mb-4">
+                        <p key={i} className="text-sm sm:text-base text-gray-700 mb-4">
                           {paragraph}
                         </p>
                       ))}
@@ -107,7 +108,7 @@ export default function TestimonialCarousel() {
                         <p className="font-medium text-gray-900">
                           {currentTestimonial.name}, {currentTestimonial.title}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-xs sm:text-sm text-gray-500">
                           Rating: {currentTestimonial.rating} • (Passed {currentTestimonial.title} in{" "}
                           {currentTestimonial.attempts} Attempt{currentTestimonial.attempts > 1 ? "s" : ""})
                         </p>
@@ -142,4 +143,3 @@ export default function TestimonialCarousel() {
     </div>
   )
 }
-

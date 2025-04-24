@@ -282,18 +282,7 @@ export default function IcyChat({
     apiKey: "AIzaSyBTaTi3tBv2qEA9QWXVtR6l2inBFmOKKA4",
   });
 
-  const businessContext = `“Empowering Future Chartered Accountants & Cost Accountants with Expert Guidance & Unmatched Test Series!”
-ICEBERG is a leading CA & CMA test series platform designed to help students achieve top scores and career success.
-Our comprehensive approach, including mock tests, expert counseling, and strategic study planning, has helped thousands of students clear their exams with confidence.
-India’s Finest
-Faculties for CA,
-CS and CMA Classes
-Led by India’s finest CA, CS, and CMA educators, we provide expert mentorship, conceptual clarity, and strategic exam guidance ensuring you not only excel in your journey but emerge as an industry-ready professional, equipped with practical skills, real-world knowledge, and the confidence to succeed.
-CA ANIRUDH SHARMA
-12+ Years in Coaching experience
-
-A distinguished CA, CS and Law graduate, founded SPC in 2010 to revolutionize CA education. With innovative teaching methods and a student-centric approach, he has made complex subjects accessible, ensuring aspiring CAs receive top-notch guidance, support, and mentorship to excel.
-`;
+  const businessContext = `“Empowering Future Chartered Accountants & Cost Accountants with Expert Guidance & Unmatched Test Series!”`;
 
   const addAgentMessage = (text: string) => {
     setMessages((prev) => [...prev, { sender: "agent", text }]);
@@ -455,6 +444,25 @@ A distinguished CA, CS and Law graduate, founded SPC in 2010 to revolutionize CA
           </div>
         </form>
       </div>
+
+      {/* <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
+        <div className="flex items-center gap-2 p-2 border border-gray-200 rounded-full">
+          <button type="button" className="p-2"></button>
+          <input
+            type="text"
+            placeholder="Reply ..."
+            className="flex-1 outline-none bg-transparent"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="w-12 h-12 rounded-full bg-[#4629f2] flex items-center justify-center"
+          >
+            <Send className="w-5 h-5 text-white" />
+          </button>
+        </div>
+      </form> */}
     </div>
   );
 }

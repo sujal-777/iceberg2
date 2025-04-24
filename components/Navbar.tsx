@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <div className="w-full pb-6">
       <div className="w-full bg-white shadow-sm">
-        <div className="flex h-20 items-center justify-between px-4 md:px-12 lg:px-20">
+        <div className="mx-[50px] flex h-20 items-center justify-between px-6 md:px-12 lg:px-20"> {/* 50px margins */}
           {/* Logo */}
           <div className="flex-shrink-0 pt-2">
             <Link href="/">
