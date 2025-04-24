@@ -13,8 +13,8 @@ export default function Navbar() {
   return (
     <div className="w-full pb-6">
       <div className="w-full bg-white shadow-sm">
-        <div className="mx-[50px] flex h-20 items-center justify-between px-6 md:px-12 lg:px-20"> {/* 50px margins */}
-          {/* Logo */}
+      <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20">
+
           <div className="flex-shrink-0 pt-2">
             <Link href="/">
               <Image
@@ -26,7 +26,6 @@ export default function Navbar() {
               />
             </Link>
           </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex md:items-center md:space-x-8 relative">
             <NavLink href="/" text="Home" />
@@ -61,7 +60,6 @@ export default function Navbar() {
             <NavLink href="/about-us" text="About Us" />
             <NavLink href="/contact-us" text="Contact Us" />
           </nav>
-
           {/* Auth Buttons */}
           <div className="hidden md:flex md:items-center md:space-x-6">
             <Link
@@ -71,13 +69,12 @@ export default function Navbar() {
               Log in
             </Link>
             <Link
-              href="/test-series"
+              href="/sign-up"
               className="rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
             >
               Get Started
             </Link>
           </div>
-
           {/* Mobile Menu Button */}
           <button
             className="md:hidden rounded-md p-2 text-gray-500 hover:bg-gray-100"
@@ -98,9 +95,7 @@ export default function Navbar() {
             <MobileNavLink href="/" text="Home" />
             <div className="space-y-1">
               <button
-                onClick={() =>
-                  setIsMobileDropdownOpen(!isMobileDropdownOpen)
-                }
+                onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
                 className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
               >
                 Test Series
