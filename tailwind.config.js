@@ -78,6 +78,12 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "slide-in": "slide-in 0.3s ease-out",
       },
+      spacing : {
+        'page-margin' : '200px'
+      },
+      maxWidth: {
+        'content': 'calc(100% - 400px)', 
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
