@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function FacultyShowcase() {
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 w-full">
-      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+      <div className="max-w-full mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12" style={{ paddingLeft: '100px', paddingRight: '100px' }}>
         
         {/* Left Section */}
         <div className="w-full lg:w-2/5 text-center lg:text-left space-y-6">
@@ -24,8 +24,8 @@ export default function FacultyShowcase() {
         </div>
 
         {/* Right Section - Faculty Card */}
-        <div className="w-full lg:w-3/5 flex justify-center">
-          <div className="bg-[#EEF6FF] border border-gray-200 shadow-md rounded-xl p-6 sm:p-8 max-w-md w-full text-center">
+        <div className="w-full lg:w-2/5 flex justify-center">
+          <div className="bg-[#EEF6FF] border border-gray-200 shadow-md rounded-xl p-6 sm:p-8 w-full text-center">
             <Image 
               src="/faculty1.png" 
               alt="CA Anirudh Sharma" 

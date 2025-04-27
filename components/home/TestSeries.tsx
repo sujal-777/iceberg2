@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export default function TestSeries() {
   return (
-    <div className="bg-[#EEF6FF] min-h-screen flex flex-col items-center py-10">
-      <h1 className="text-3xl sm:text-4xl font-bold text-black mb-8 text-center">
+    <div className="bg-[#EEF6FF] min-h-screen flex flex-col items-center py-20">
+      <h1 className="text-3xl sm:text-4xl font-bold text-black mb-22 text-center">
         Test Series Showcase
       </h1>
 
       {/* Category Buttons */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 w-full max-w-7xl px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-12 w-full max-w-7xl px-4">
         {["CA TEST SERIES", "CS TEST SERIES", "CMA TEST SERIES"].map(
           (category, index) => (
             <button
