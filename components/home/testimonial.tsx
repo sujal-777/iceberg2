@@ -63,68 +63,74 @@ export default function TestimonialCarousel() {
         </div>
 
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 leading-tight">
-          See How ICEBERG Transformed Students&apos; Exam Journeys
+          See How ICEBERG Transformed Student's Exam Journeys
         </h2>
 
         <div className="relative max-w-4xl mx-auto">
-          <Card className="overflow-hidden border border-gray-200 rounded-xl shadow-sm">
-            <CardContent className="p-0">
-              <div className="flex flex-col md:flex-row">
-                {/* Image or video thumbnail */}
-                <div className="relative w-full md:w-2/5">
-                  <div className="aspect-square md:aspect-[4/3] relative">
-                    <Image
-                      src={currentTestimonial.image || "/placeholder.svg"}
-                      alt={`${currentTestimonial.name}'s testimonial`}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Button size="icon" className="h-12 w-12 rounded-full bg-white/80 hover:bg-white text-blue-600">
-                        <Play className="h-6 w-6 fill-current" />
-                        <span className="sr-only">Play video</span>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+        <Card className="overflow-hidden border-2 border-[#0066CC] rounded-2xl shadow-sm max-w-5xl mx-auto">
+  <CardContent className="p-0">
+    <div className="flex flex-col md:flex-row items-center md:items-start justify-between h-full">
 
-                {/* Testimonial content */}
-                <div className="w-full md:w-3/5 p-6 sm:p-8">
-                  <div className="h-full flex flex-col">
-                    <div className="flex-grow">
-                      {currentTestimonial.content.split("\n\n").map((paragraph, i) => (
-                        <p key={i} className="text-sm sm:text-base text-gray-700 mb-4">
-                          {paragraph}
-                        </p>
-                      ))}
-                    </div>
+      {/* Left Side: Image */}
+      <div className="relative w-full md:w-[45%] h-full p-6">
+        <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
+          <Image
+            src={currentTestimonial.image || "/placeholder.svg"}
+            alt={`${currentTestimonial.name}'s testimonial`}
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Button
+              size="icon"
+              className="h-14 w-14 rounded-full bg-white/80 hover:bg-white text-blue-600 shadow-md"
+            >
+              <Play className="h-7 w-7 fill-current" />
+              <span className="sr-only">Play video</span>
+            </Button>
+          </div>
+        </div>
+      </div>
 
-                    <div className="flex items-center mt-4">
-                      <Avatar className="h-10 w-10 border">
-                        <AvatarImage src={currentTestimonial.image} alt={currentTestimonial.name} />
-                        <AvatarFallback>{currentTestimonial.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div className="ml-3">
-                        <p className="font-medium text-gray-900">
-                          {currentTestimonial.name}, {currentTestimonial.title}
-                        </p>
-                        <p className="text-xs sm:text-sm text-gray-500">
-                          Rating: {currentTestimonial.rating} • (Passed {currentTestimonial.title} in{" "}
-                          {currentTestimonial.attempts} Attempt{currentTestimonial.attempts > 1 ? "s" : ""})
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      {/* Right Side: Content */}
+      <div className="w-full md:w-[55%] p-8 flex flex-col justify-between h-full">
+        <div>
+          {currentTestimonial.content.split("\n\n").map((paragraph, i) => (
+            <p
+              key={i}
+              className="text-base text-gray-800 mb-6 leading-relaxed"
+            >
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div className="flex items-center mt-4">
+          <Avatar className="h-12 w-12 border">
+            <AvatarImage src={currentTestimonial.image} alt={currentTestimonial.name} />
+            <AvatarFallback>{currentTestimonial.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="ml-3">
+            <p className="font-semibold text-gray-900">
+              {currentTestimonial.name}, {currentTestimonial.title}
+            </p>
+            <p className="text-sm text-gray-600">
+              Rating: {currentTestimonial.rating} ⭐ (Passed {currentTestimonial.title} in {currentTestimonial.attempts} Attempt{currentTestimonial.attempts > 1 ? "s" : ""})
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </CardContent>
+</Card>
+
 
           {/* Navigation buttons */}
           <Button
             onClick={prevTestimonial}
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white rounded-full h-10 w-10 shadow-md"
+            className="absolute left-[-60px]  top-1/2 -translate-y-1/2 -translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white rounded-full h-10 w-10 shadow-md"
           >
             <ChevronLeft className="h-5 w-5" />
             <span className="sr-only">Previous testimonial</span>
@@ -133,7 +139,7 @@ export default function TestimonialCarousel() {
           <Button
             onClick={nextTestimonial}
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white rounded-full h-10 w-10 shadow-md"
+            className="absolute right-[-60px] top-1/2 -translate-y-1/2 translate-x-1/2 bg-blue-600 hover:bg-blue-700 text-white rounded-full h-10 w-10 shadow-md"
           >
             <ChevronRight className="h-5 w-5" />
             <span className="sr-only">Next testimonial</span>
