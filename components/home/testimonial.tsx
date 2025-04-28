@@ -63,7 +63,7 @@ export default function TestimonialCarousel() {
         </div>
 
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 leading-tight">
-          See How ICEBERG Transformed Student's Exam Journeys
+          See How ICEBERG Transformed Student&apos;s Exam Journeys
         </h2>
 
         <div className="relative max-w-4xl mx-auto">
