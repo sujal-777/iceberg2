@@ -9,10 +9,10 @@ import { Textarea } from "@/components/ui/textarea"
 
 export default function JobApplication() {
   return (
-    <div className="container mx-auto max-w-3xl py-12 px-4">
-      <h1 className="text-2xl font-bold text-center mb-8">Why Join Us</h1>
+    <div className="container mx-auto max-w-7xl py-12 px-4">
+      <h1 className="text-3xl font-extrabold text-center mb-8">Why Join Us</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-7xl">
         <div className="border rounded-lg p-6">
           <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center mb-4">
             <DollarSign className="h-5 w-5 text-blue-600" />
@@ -44,9 +44,10 @@ export default function JobApplication() {
         </div>
       </div>
 
-      <h2 className="text-2xl font-bold text-center mb-8">Apply Now</h2>
+      <h2 className="text-3xl font-extrabold text-center mb-8">Apply Now</h2>
+      <div className="w-full flex justify-center">
 
-      <form className="space-y-6">
+      <form className="space-y-6 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label htmlFor="firstName" className="block text-sm">
@@ -164,6 +165,8 @@ export default function JobApplication() {
           </Button>
         </div>
       </form>
+      </div>
+
     </div>
   )
 }
