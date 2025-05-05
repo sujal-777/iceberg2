@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Concept() {
   return (
-    <section className="relative mx-auto my-8 h-[662px] w-full max-w-[1520px] overflow-hidden">
+    <section className="relative mx-auto  h-[662px] w-full max-w-7xl overflow-hidden">
       {/* Background Image - Full width and height */}
       <div className="absolute inset-0 z-0">
         <Image src="/content-page.png" alt="Background image showing workspace" fill className="object-cover" priority />

@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 export default function JobApplication() {
   return (
     <div className="container mx-auto max-w-7xl py-12 px-4">
-      <h1 className="text-3xl font-extrabold text-center mb-8">Why Join Us</h1>
+      <h1 className="text-4xl font-bold text-center mb-8">Why Join Us</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-7xl">
         <div className="border rounded-lg p-6">
@@ -44,7 +44,7 @@ export default function JobApplication() {
         </div>
       </div>
 
-      <h2 className="text-3xl font-extrabold text-center mb-8">Apply Now</h2>
+      <h2 className="text-4xl font-bold text-center mb-8">Apply Now</h2>
       <div className="w-full flex justify-center">
 
       <form className="space-y-6 w-full">

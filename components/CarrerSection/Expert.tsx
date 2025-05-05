@@ -4,7 +4,7 @@ import { PlaneIcon as PaperPlaneIcon, FileTextIcon } from "lucide-react"
 
 export default function ExpertTeamSection() {
   return (
-    <section className="relative mx-auto my-8 h-[662px] w-full max-w-[1520px] overflow-hidden">
+    <section className="relative mx-auto h-[662px] w-full max-w-7xl overflow-hidden">
       {/* Background Image - Full width and height */}
       <div className="absolute inset-0 z-0">
         <Image src="/expert-team.png" alt="Background image showing workspace" fill className="object-cover" priority />
@@ -22,7 +22,7 @@ export default function ExpertTeamSection() {
             <h2 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">Join Our Expert Team</h2>
             <h3 className="mb-5 text-2xl font-semibold text-gray-800">Shape the Future of CA Education</h3>
             <p className="mb-10 text-base leading-relaxed text-gray-700 md:text-lg lg:text-xl">
-              We're looking for experienced CA professionals to join our expert teaching team. Help us create high
+              We&apos;re looking for experienced CA professionals to join our expert teaching team. Help us create high
               quality CA series and shape the next generation of chartered accountants.
             </p>
 
