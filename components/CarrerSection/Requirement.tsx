@@ -12,7 +12,7 @@ export default function Requirement() {
           {/* CA Final Paper Setting Card */}
           <div className="bg-blue-50 rounded-xl border border-black w-full md:w-[520px] h-[400px] p-0 overflow-hidden">
             <div className="flex items-center px-8 pt-8 pb-4">
-              <Image src="/career-icon.png" alt="Career Logo" className="w-10 h-10" />
+              <Image src="/career-icon.png" alt="Career Logo" width={50} height={50}/>
               <h2 className="text-2xl font-bold text-gray-800 ml-4">
                 For CA Final Paper Setting
               </h2>
@@ -72,7 +72,7 @@ export default function Requirement() {
           {/* CA Inter Paper Setting Card */}
           <div className="bg-blue-50 rounded-xl border border-black w-full md:w-[520px] h-[400px] p-0 overflow-hidden">
             <div className="flex items-center px-8 pt-8 pb-4">
-              <Image src="/career-icon.png" alt="Career Logo" className="w-10 h-10" />
+              <Image src="/career-icon.png" alt="Career Logo" width={50} height={50} />
               <h2 className="text-2xl font-bold text-gray-800 ml-4">
                 For CA Inter Paper Setting
               </h2>
