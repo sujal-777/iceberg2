@@ -33,7 +33,7 @@ const TestCardsSection = () => {
                 </Badge>
               </div>
               <div className="flex items-center gap-1 text-gray-500">
-                <Clock className="h-4 w-4" />
+                <Clock />
                 Last: 2 days ago
               </div>
             </div>
@@ -70,7 +70,7 @@ const TestCardsSection = () => {
                 </Badge>
               </div>
               <div className="flex items-center gap-1 text-gray-500">
-                <Clock className="h-4 w-4" />
+                <Clock />
                 Last: 5 days ago
               </div>
             </div>
@@ -107,7 +107,7 @@ const TestCardsSection = () => {
                 </Badge>
               </div>
               <div className="flex items-center gap-1 text-gray-500">
-                <Clock className="h-4 w-4" />
+                <Clock />
                 Last: 2 days ago
               </div>
             </div>

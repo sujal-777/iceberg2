@@ -1,5 +1,7 @@
 
 export default function Page() {
-    return <div>CA Test Page</div>;
+    return(<div>CA Test Page</div>
+
+    );
   }
   
