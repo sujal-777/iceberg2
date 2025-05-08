@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['randomuser.me', 'i.ytimg.com', 'img.youtube.com'], // add more as needed
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:5000/api/:path*', // Proxy to backend
+      },
+    ];
+  },
 };
 
 export default nextConfig;

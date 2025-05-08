@@ -1,11 +1,8 @@
-import ImageSection from "@/components/testPage/imagesection";
-import TestCardsSection from "@/components/testPage/TestCards";
 
 export default function MockTestPlatform() {
   return (
     <div className="flex flex-col w-full max-w-auto mx-auto">
-      {/* Hero Section */}
-      <ImageSection />
+      
 
       {/* Main Content */}
       <div className="px-4 py-8 md:px-6">
@@ -20,8 +17,6 @@ export default function MockTestPlatform() {
           </p>
         </div>
 
-        {/* Test Series Section */}
-        <TestCardsSection />
       </div>
     </div>
   );
