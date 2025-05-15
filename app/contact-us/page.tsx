@@ -8,7 +8,7 @@ export default function PAGE() {
     <>
       <ContactUs />
       <FAQSection />
-      <FreeBatchesSection/>1
+      <FreeBatchesSection/>
       <Contact/>
     </>
   );

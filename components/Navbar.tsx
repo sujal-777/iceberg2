@@ -183,8 +183,6 @@
 //   );
 // }
 
-
-
 // "use client";
 
 // import Link from "next/link";
@@ -383,7 +381,6 @@
 //   );
 // }
 
-
 "use client";
 
 import Link from "next/link";
@@ -397,13 +394,18 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTestDropdownOpen, setIsTestDropdownOpen] = useState(false);
   const [isAcademyDropdownOpen, setIsAcademyDropdownOpen] = useState(false);
-  const [isMobileTestDropdownOpen, setIsMobileTestDropdownOpen] = useState(false);
-  const [isMobileAcademyDropdownOpen, setIsMobileAcademyDropdownOpen] = useState(false);
+  const [isMobileTestDropdownOpen, setIsMobileTestDropdownOpen] =
+    useState(false);
+  const [isMobileAcademyDropdownOpen, setIsMobileAcademyDropdownOpen] =
+    useState(false);
+
+  const { user } = useUser();
 
   return (
     <div className="w-full pb-6">
@@ -520,7 +522,14 @@ export default function Navbar() {
               </div>
             </SignedOut>
             <SignedIn>
-              <UserButton afterSignOutUrl="/" />
+              <div className="flex items-center gap-3">
+                {user?.firstName && (
+                  <span className="text-sm text-gray-700 font-medium hidden lg:inline">
+                    👋 Welcome, {user.firstName}
+                  </span>
+                )}
+                <UserButton afterSignOutUrl="/" />
+              </div>
             </SignedIn>
           </div>
 
@@ -544,7 +553,9 @@ export default function Navbar() {
             <MobileNavLink href="/" text="Home" />
             <div className="space-y-1">
               <button
-                onClick={() => setIsMobileTestDropdownOpen(!isMobileTestDropdownOpen)}
+                onClick={() =>
+                  setIsMobileTestDropdownOpen(!isMobileTestDropdownOpen)
+                }
                 className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
               >
                 Test Series
@@ -579,7 +590,9 @@ export default function Navbar() {
             <MobileNavLink href="/lecture" text="Concept Videos" />
             <div className="space-y-1">
               <button
-                onClick={() => setIsMobileAcademyDropdownOpen(!isMobileAcademyDropdownOpen)}
+                onClick={() =>
+                  setIsMobileAcademyDropdownOpen(!isMobileAcademyDropdownOpen)
+                }
                 className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
               >
                 Academy
@@ -614,7 +627,12 @@ export default function Navbar() {
               </SignUpButton>
             </SignedOut>
             <SignedIn>
-              <div className="flex justify-center">
+              <div className="flex flex-col items-center space-y-2">
+                {user?.firstName && (
+                  <span className="text-sm text-gray-700 font-medium text-center">
+                    👋 Welcome, {user.firstName}
+                  </span>
+                )}
                 <UserButton afterSignOutUrl="/" />
               </div>
             </SignedIn>
@@ -625,13 +643,7 @@ export default function Navbar() {
   );
 }
 
-function NavLink({
-  href,
-  text,
-}: {
-  href: string;
-  text: string;
-}) {
+function NavLink({ href, text }: { href: string; text: string }) {
   return (
     <Link
       href={href}
@@ -652,4 +664,3 @@ function MobileNavLink({ href, text }: { href: string; text: string }) {
     </Link>
   );
 }
-

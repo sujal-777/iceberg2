@@ -10,11 +10,14 @@ import TestSeries from "@/components/home/TestSeries";
 import AboutUs from "@/components/home/about-us";
 import ContactUs from "@/components/home/Contact-Us";
 import FAQSection from "@/components/home/FaqSec";
+import { useSyncClerkUser } from "@/hooks/useSyncClerkUser";
 
 export default function Home() {
   const [openChat, setOpenChat] = useState(false);
 
   const toggleChat = () => setOpenChat(!openChat);
+
+  useSyncClerkUser();
 
   return (
     <>
