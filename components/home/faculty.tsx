@@ -3,8 +3,8 @@ import Image from 'next/image';
 export default function FacultyShowcase() {
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24 w-full">
-      <div className="max-w-full mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12" style={{ paddingLeft: '100px', paddingRight: '100px' }}>
-        
+      <div className="max-w-full mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-12 px-4 sm:px-6 md:px-8 lg:px-[100px] xl:px-[100px]">
+
         {/* Left Section */}
         <div className="w-full lg:w-2/5 text-center lg:text-left space-y-6">
           <h1 className="text-3xl sm:text-4xl font-bold leading-tight text-gray-900">
@@ -25,12 +25,12 @@ export default function FacultyShowcase() {
 
         {/* Right Section - Faculty Card */}
         <div className="w-full lg:w-2/5 flex justify-center">
-          <div className="bg-[#EEF6FF] border border-gray-200 shadow-md rounded-xl p-6 sm:p-8 w-full text-center">
-            <Image 
-              src="/faculty1.png" 
-              alt="CA Anirudh Sharma" 
-              width={600} 
-              height={300} 
+          <div className="bg-[#EEF6FF] border border-gray-200 shadow-md rounded-xl p-4 sm:p-6 w-full max-w-md text-center">
+            <Image
+              src="/faculty1.png"
+              alt="CA Anirudh Sharma"
+              width={600}
+              height={300}
               className="rounded-lg object-cover w-full h-auto"
             />
             <h2 className="text-xl sm:text-2xl font-bold text-blue-700 mt-4">
@@ -46,9 +46,7 @@ export default function FacultyShowcase() {
             </p>
           </div>
         </div>
-
       </div>
     </section>
   );
 }
-
