@@ -51,7 +51,7 @@ export default function FAQSection() {
       </h2>
 
       {/* FAQ List */}
-      <div className="w-full max-w-3xl space-y-4">
+      <div className="w-full max-w-4xl space-y-4">
         {faqs.map((faq, index) => (
           <div
             key={index}
