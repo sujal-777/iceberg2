@@ -492,7 +492,7 @@ export default function Navbar() {
                     href="/career"
                     className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
                   >
-                    Career with Us
+                    Partner with Us
                   </Link>
                   <Link
                     href="/contact-us"

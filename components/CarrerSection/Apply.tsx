@@ -53,7 +53,7 @@ export default function JobApplication() {
       if (resumeFile) {
         const fileExt = resumeFile.name.split(".").pop()
         const fileName = `${formData.first_name}_${formData.last_name}_${Date.now()}.${fileExt}`
-        const { data, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from("resumes")
           .upload(fileName, resumeFile)
 
