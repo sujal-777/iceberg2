@@ -118,5 +118,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Chrome, Edge, Safari (WebKit) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
   }
 }
