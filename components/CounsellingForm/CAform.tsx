@@ -13,8 +13,8 @@ import { supabase } from "@/lib/supabaseClient";
 const CAForm = () => {
   const [detailsSelection,setDetailsSelection]=useState<string>('Personal Details');
   const [detailsCompletionArray,setDetailsCompletionArray]=useState<string[]>(['Personal Details']);
-  const dateInputRef = useRef(null);
-  const dobInputRef = useRef(null);
+  const dateInputRef = useRef<HTMLInputElement>(null);
+  const dobInputRef = useRef<HTMLInputElement>(null);
 const [formData, setFormData] = useState({first_name: '',last_name: '',phone: '',email: '',dob: '',gender: '',study: '',ca_level: '',attempt: '',additional: '',date: '',time: '',
   contact: {
     phone: false,
@@ -34,11 +34,11 @@ const handledobIconClick = () => {
   };
 
   
-  function handleChange(e: { target: { name: any; value: any; type: any; checked: any; }; }) {
-  const { name, value, type, checked } = e.target;
+function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  const { name, value, type } = e.target;
+  const checked = (e.target as HTMLInputElement).checked;
 
   if (type === 'checkbox') {
-    // for checkboxes inside contactPreference or declaration
     setFormData(prev => ({
       ...prev,
       contact: {
@@ -227,7 +227,7 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                 Please select your current level in the CA program:
                 </label>
                 <select
-                  id="select" type='select' name='ca_level' value={formData.ca_level} onChange={handleChange}
+                  id="select" name='ca_level' value={formData.ca_level} onChange={handleChange}
                   className="block max-w-[650px] h-[45px] p-2 border border-black rounded-[10px]  focus:ring-[#0048B0] focus:border-blue-500" required>
                   {CA_levelOptions.map((option, idx) => (
                     <option key={idx}  value={option} className=''>
@@ -313,16 +313,16 @@ const handleSubmit = async (e: { preventDefault: () => void; }) => {
                     <p>Your contact number will be used solely for scheduling adn communication purposes. All your details are securely encrypted and kept confidential.</p>
                     
                       <label htmlFor='' className='flex items-center gap-[19px]'>
-                    <input type='checkbox' name='phone' value={formData.contact.phone} onChange={handleChange} className='accent-[#0048B0] w-5 h-5'></input>
+                    <input type='checkbox' name='phone' checked={formData.contact.phone} onChange={handleChange} className='accent-[#0048B0] w-5 h-5'></input>
                     Phone</label>
                 
                     <label htmlFor='' className='flex items-center gap-[19px]'>
-                    <input type='checkbox' name='whatsup' value={formData.contact.whatsApp} onChange={handleChange} className='accent-[#0048B0] w-5 h-5'></input>
+                    <input type='checkbox' name='whatsApp' checked={formData.contact.whatsApp} onChange={handleChange} className='accent-[#0048B0] w-5 h-5'></input>
                     WhatsApp</label>
                  
                  
                     <label htmlFor='' className='flex items-center gap-[19px]'>
-                    <input type='checkbox' name='email' value={formData.contact.email} onChange={handleChange} className='accent-[#0048B0] w-5 h-5'></input>
+                    <input type='checkbox' name='email' checked={formData.contact.email} onChange={handleChange} className='accent-[#0048B0] w-5 h-5'></input>
                     Email</label>
                  
                   </div>
