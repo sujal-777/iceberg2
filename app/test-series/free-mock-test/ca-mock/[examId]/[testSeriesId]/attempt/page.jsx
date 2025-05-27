@@ -3,23 +3,26 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { useRef } from 'react';
-
+import { Document, Page } from 'react-pdf';
 export default function MockTestPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [reviewList, setReviewList] = useState([]);
   const [typeQuest,setTypeQuest]=useState('MCQ');
-   const [questionsData,setQuestionsData] = useState([]);
+  const [questionsData,setQuestionsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const currentQuestion = questionsData[currentIndex];
-    const { examId, testSeriesId } = useParams();
-    const THREE_HOURS_IN_SECONDS = 3 * 60 * 60; // 10800 seconds
+  const { examId, testSeriesId } = useParams();
+  const THREE_HOURS_IN_SECONDS = 3 * 60 * 60; // 10800 seconds
   const [secondsLeft, setSecondsLeft] = useState(THREE_HOURS_IN_SECONDS);
-const [visited, setVisited] = useState([]);
-
-const inputRef = useRef(null);
+  const [visited, setVisited] = useState([]);
+  const [descriptiveQuestions,setDescriptiveQuestions]=useState([]);
+  const inputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [currentPdfIdx,setCurrentPdfIdx]=useState(0);
+  const currentPdf=descriptiveQuestions[currentPdfIdx];
+const [descriptAnswer,setDescriptAnswer]=useState(null);
 
   const handleFiles = (files) => {
     const fileList = Array.from(files);
@@ -35,6 +38,7 @@ const inputRef = useRef(null);
       e.dataTransfer.clearData();
     }
   };
+
 useEffect(() => {
   const currentQId = questionsData[currentIndex]?._id;
   if (currentQId && !visited.includes(currentQId)) {
@@ -68,7 +72,10 @@ useEffect(() => {
       try {
         const res = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/questions`);
         const data = await res.json();
-       setQuestionsData(data);
+         const mcqs = data.filter(q => 'question' in q && !('questionPDF' in q));
+        const descriptives = data.filter(q =>  'questionPDF' in q);
+       setQuestionsData(mcqs);
+       setDescriptiveQuestions(descriptives);
       } catch (err) {
         console.error('Error fetching questions:', err);
       } finally {
@@ -77,9 +84,18 @@ useEffect(() => {
     }
     if (testSeriesId) fetchQuestions();
   }, [testSeriesId]);
+ 
+
+    
+        
+
+
   useEffect(()=>{
 console.log("questions:",questionsData)
-  },[questionsData])
+console.log("questionpdf",descriptiveQuestions)
+console.log('pdf url',currentPdf)
+console.log('answers',answers)
+  },[questionsData,descriptiveQuestions,currentPdf,answers])
   useEffect(()=>{
 console.log("answers:",answers)
   },[answers])
@@ -217,8 +233,20 @@ const progress=((currentIndex + 1) / questionsData.length) * 100
 
       {typeQuest==='Descriptive' &&( <div className="relative flex justify-center h-[843px] gap-[10px] ">
         <div className="bg-white w-[966px] p-6 rounded-[10px] shadow border-[1px] border-black">
-          <div className='h-[655px] w-[527px] bg-blue-500 mx-auto'></div>
-          <div className='flex justify-between items-center mt-[80px]'>
+          {/* <div className='h-[655px] w-[527px] bg-blue-500 mx-auto'></div> */}
+           <div className="w-full h-screen">
+      {currentPdf?.questionPDF.publicURL ? (
+        <iframe
+          src={currentPdf.questionPDF.publicURL}
+          width="700px"
+          height="655px"
+          className="border rounded mx-auto"
+        />
+      ) : (
+        <p>Loading PDF...</p>
+      )}
+    </div>
+          <div className='flex justify-between items-center mt-[10px]'>
               <div className='flex items-center gap-[18px]'>
                  <button className="px-4 py-2 rounded">
               Mark for Review
@@ -226,8 +254,8 @@ const progress=((currentIndex + 1) / questionsData.length) * 100
                 <p>Clear responce</p>
             </div>
             <div className='flex gap-[10px]'>
-              <button className='h-[45px] w-[128px] text-[#0048B0] rounded-[12px] border-[1px] border-[#0048B0]'>Previous</button>
-              <button className='h-[45px] w-[128px] bg-[#0048B0] text-white rounded-[12px] border-[1px] border-[#0048B0]'>Save & Next</button>
+              <button className={`h-[45px] w-[128px] text-[#0048B0] rounded-[12px] border-[1px] border-[#0048B0] ${currentPdfIdx>0? 'bg-white text-[#0048B0]' :'bg-gray-300 text-gray-600 cursor-not-allowed'}`}  onClick={()=>setCurrentPdfIdx((prev) =>prev-1)}>Previous</button>
+              <button className='h-[45px] w-[128px] bg-[#0048B0] text-white rounded-[12px] border-[1px] border-[#0048B0]' onClick={()=>{setCurrentPdfIdx((prev) =>prev+1), setAnswers((prev) => ({ ...prev, [currentPdf._id]: selectedFiles}));}}>Save & Next</button>
             </div>
             </div>
         </div>
@@ -238,7 +266,7 @@ const progress=((currentIndex + 1) / questionsData.length) * 100
             </div>
             <div className='flex  items-center gap-[20px] px-[29px] bg-[#E3EEFF] mt-[40px] h-[102px] rounded-[15px] border-[1px] border-[#0048B0]'>
             <img src='/pdfformat.png' width={48} height={65} alt=''/>
-            <p className='flex flex-col  text-[20px] font-[600] text-[#0048B0]'>theprojetks-design-tokens.pdf<span className=' text-[16px] font-normal text-black'>10.0MB</span></p>
+            <p className='flex flex-col  text-[20px] font-[600] text-[#0048B0]'>{currentPdf?.questionPDF.fileName}<span className=' text-[16px] font-normal text-black'>10.0MB</span></p>
             </div>
             <h1 className='text-[20px] font-bold mt-[150px] mb-[20px]'>Submit your answere PDF here</h1>
             <div className='flex flex-col justify-center items-center gap-[18px] h-[205px] w-[472px] border-dashed border-[1px] border-[#000000] rounded-[10px]' onDragOver={(e) => {
@@ -249,7 +277,7 @@ const progress=((currentIndex + 1) / questionsData.length) * 100
               <h1 className='text-[17px] font-[600]'>Drag & Drop your file here</h1>
               {selectedFiles.length > 0 && <ul className="mt-4 text-left text-sm text-gray-700">
           {selectedFiles.map((file, index) => (
-            <li key={index}>• {file.name}</li>
+            <li key={index}>{file.name}</li>
           ))}
         </ul>}
               <div className='flex items-center gap-[10px] justify-center'>
