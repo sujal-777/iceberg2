@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/blog/[id]/page.jsx", "app/lecture/page.jsx", "components/VideoSection/ContentPage/VideoModal.sx", "components/VideoSection/ContentPage/VideoCard.jsx", "components/VideoSection/ContentPage/Filters.jsx", "app/test-series/free-mock-test/ca-mock/test-section/page.jsx", "app/test-series/free-mock-test/ca-mock/[examId]/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/blog/[id]/page.jsx", "app/lecture/page.jsx", "components/VideoSection/ContentPage/VideoModal.sx", "components/VideoSection/ContentPage/VideoCard.jsx", "components/VideoSection/ContentPage/Filters.jsx", "app/test-series/free-mock-test/ca-mock/test-section/page.jsx", "app/test-series/free-mock-test/ca-mock/[examId]/page.jsx", "components/CounsellingForm/CAform.jsx", "app/test-series/free-mock-test/ca-mock/[examId]/[testSeriesId]/instruction/page.jsx"],
   "exclude": ["node_modules"]
 }
