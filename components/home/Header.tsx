@@ -56,9 +56,162 @@ export default function CAExamHero() {
     },
   }
 
+  // Floating elements data
+  const floatingElements = [
+    {
+      id: 1,
+      size: "w-16 h-16",
+      color: "bg-blue-200",
+      position: "top-10 left-10",
+      animation: {
+        y: [0, -25, 0],
+        x: [0, 15, 0],
+        rotate: [0, 180, 360],
+      },
+      duration: 8,
+      delay: 0,
+    },
+    {
+      id: 2,
+      size: "w-12 h-12",
+      color: "bg-purple-200",
+      position: "top-20 right-16",
+      animation: {
+        y: [0, 20, 0],
+        x: [0, -10, 0],
+        scale: [1, 1.2, 1],
+      },
+      duration: 6,
+      delay: 1,
+    },
+    {
+      id: 3,
+      size: "w-20 h-20",
+      color: "bg-indigo-200",
+      position: "bottom-32 left-20",
+      animation: {
+        y: [0, -30, 0],
+        rotate: [0, -180, -360],
+      },
+      duration: 10,
+      delay: 2,
+    },
+    {
+      id: 4,
+      size: "w-14 h-14",
+      color: "bg-cyan-200",
+      position: "bottom-20 right-10",
+      animation: {
+        y: [0, 25, 0],
+        x: [0, 12, 0],
+        scale: [1, 0.8, 1],
+      },
+      duration: 7,
+      delay: 0.5,
+    },
+    {
+      id: 5,
+      size: "w-10 h-10",
+      color: "bg-pink-200",
+      position: "top-1/3 left-1/4",
+      animation: {
+        y: [0, -15, 0],
+        x: [0, 20, 0],
+        rotate: [0, 90, 180],
+      },
+      duration: 9,
+      delay: 3,
+    },
+    {
+      id: 6,
+      size: "w-18 h-18",
+      color: "bg-emerald-200",
+      position: "top-2/3 right-1/4",
+      animation: {
+        y: [0, 18, 0],
+        x: [0, -15, 0],
+        scale: [1, 1.3, 1],
+      },
+      duration: 5,
+      delay: 1.5,
+    },
+  ]
+
   return (
-    <section className="w-full bg-white py-12 md:py-16 lg:py-20 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="w-full bg-white py-12 md:py-16 lg:py-20 overflow-hidden relative">
+      {/* Floating Background Elements */}
+      {floatingElements.map((element) => (
+        <motion.div
+          key={element.id}
+          className={`absolute ${element.size} ${element.color} rounded-full opacity-20 pointer-events-none ${element.position}`}
+          animate={element.animation}
+          transition={{
+            duration: element.duration,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+            delay: element.delay,
+          }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.2 }}
+        />
+      ))}
+
+      {/* Additional Geometric Shapes */}
+      <motion.div
+        className="absolute top-1/4 left-1/3 w-8 h-8 border-2 border-blue-300 opacity-30 pointer-events-none"
+        animate={{
+          rotate: [0, 360],
+          scale: [1, 1.5, 1],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "linear",
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.3 }}
+      />
+
+      <motion.div
+        className="absolute bottom-1/3 right-1/3 w-6 h-6 bg-gradient-to-r from-purple-300 to-pink-300 opacity-25 pointer-events-none"
+        style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 120, 240, 360],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 2.5,
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.25 }}
+      />
+
+      {/* Particle-like small dots */}
+      {[...Array(8)].map((_, i) => (
+        <motion.div
+          key={`particle-${i}`}
+          className="absolute w-6 h-6 bg-blue-400 rounded-full opacity-40 pointer-events-none"
+          style={{
+            left: `${15 + i * 12}%`,
+            top: `${20 + (i % 3) * 25}%`,
+          }}
+          animate={{
+            y: [0, -10, 0],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 3 + i * 0.5,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+            delay: i * 0.3,
+          }}
+        />
+      ))}
+
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
           className="grid items-center gap-12 lg:grid-cols-2"
           variants={containerVariants}
@@ -107,9 +260,11 @@ export default function CAExamHero() {
               </motion.div>
 
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
-                  Book an Appointment
-                </Button>
+                <a href="/counseling" tabIndex={-1}>
+                  <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+                    Book an Appointment
+                  </Button>
+                </a>
               </motion.div>
             </motion.div>
           </motion.div>

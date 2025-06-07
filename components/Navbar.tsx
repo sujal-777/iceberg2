@@ -6,6 +6,7 @@ import { ChevronDown, Menu, X } from "lucide-react"
 import Image from "next/image"
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs"
 import { motion, AnimatePresence } from "framer-motion"
+import { FiHome } from "react-icons/fi"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -214,25 +215,34 @@ export default function Navbar() {
               </div>
             </SignedOut>
             <SignedIn>
-              <motion.div
-                className="flex items-center gap-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                {user?.firstName && (
-                  <motion.span
-                    className="text-sm text-gray-700 font-medium hidden lg:inline"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                  >
-                    👋 Welcome, {user.firstName}
-                  </motion.span>
-                )}
-                <UserButton afterSignOutUrl="/" />
-              </motion.div>
-            </SignedIn>
+  <motion.div
+    className="flex items-center gap-3"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5, delay: 0.4 }}
+  >
+    {user?.firstName && (
+      <motion.span
+        className="text-sm text-gray-700 font-medium hidden lg:inline"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      >
+        👋 Welcome, {user.firstName}
+      </motion.span>
+    )}
+    <UserButton>
+        <UserButton.MenuItems>
+          <UserButton.Link
+            label="Dashboard"
+            labelIcon={<FiHome />}
+            href="/dashboard"
+          />
+        </UserButton.MenuItems>
+      </UserButton>
+  </motion.div>
+</SignedIn>
+
           </motion.div>
 
           {/* Mobile Menu Button */}

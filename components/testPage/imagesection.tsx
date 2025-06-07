@@ -4,7 +4,7 @@ const ImageSection = () => {
   return (
     <div className="w-full relative">
       <Image
-        src="/fallback.png"
+        src="/fallback.jpg"
         alt="some image"
         layout="responsive"
         width={1920}

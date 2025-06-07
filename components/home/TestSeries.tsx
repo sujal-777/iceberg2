@@ -1,16 +1,35 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, forwardRef } from "react"
 
 export default function TestSeries() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [activeCategory, setActiveCategory] = useState(0)
+  type CategoryKey = 0 | 1 | 2
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>(0)
 
   const categories = ["CA TEST SERIES", "CS TEST SERIES", "CMA TEST SERIES"]
+
+  const categoryCards: Record<CategoryKey, Array<{ title: string; logo: string }>> = {
+    0: [
+      { title: "CA Foundation Exam", logo: "/CALogo.png" },
+      { title: "CA Intermediate Exam", logo: "/CALogo.png" },
+      { title: "CA Final Exam", logo: "/CALogo.png" },
+    ],
+    1: [
+      { title: "CS Foundation Exam", logo: "/CALogo.png" },
+      { title: "CS Executive Exam", logo: "/CALogo.png" },
+      { title: "CS Professional Exam", logo: "/CALogo.png" },
+    ],
+    2: [
+      { title: "CMA Foundation Exam", logo: "/CALogo.png" },
+      { title: "CMA Intermediate Exam", logo: "/CALogo.png" },
+      { title: "CMA Final Exam", logo: "/CALogo.png" },
+    ],
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -46,6 +65,34 @@ export default function TestSeries() {
         ease: "easeOut",
       },
     },
+    exit: {
+      opacity: 0,
+      scale: 0.8,
+      y: -30,
+      transition: {
+        duration: 0.4,
+        ease: "easeIn",
+      },
+    },
+  }
+
+  const logoVariants = {
+    hover: {
+      scale: 1.1,
+      rotate: [0, -5, 5, 0],
+      transition: {
+        duration: 0.5,
+      },
+    },
+  }
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.02,
+      boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+      transition: { duration: 0.3 },
+    },
+    tap: { scale: 0.98 },
   }
 
   return (
@@ -88,12 +135,10 @@ export default function TestSeries() {
               activeCategory === index ? "ring-2 ring-blue-500" : ""
             }`}
             variants={itemVariants}
-            whileHover={{
-              scale: 1.02,
-              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-            }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setActiveCategory(index)}
+            whileHover="hover"
+            whileTap="tap"
+            onClick={() => setActiveCategory(index as CategoryKey)}
+            {...buttonVariants}
           >
             <motion.span
               className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50"
@@ -113,43 +158,79 @@ export default function TestSeries() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        {[1, 2, 3].map((index) => (
-          <motion.div
-            key={index}
-            className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col items-center group cursor-pointer"
-            variants={cardVariants}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-              transition: { duration: 0.3 },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
+        <AnimatePresence mode="wait">
+          {categoryCards[activeCategory].map((card, index) => (
             <motion.div
-              className="flex justify-center items-center p-8"
-              whileHover={{ rotate: [0, -5, 5, 0] }}
-              transition={{ duration: 0.5 }}
+              key={`${activeCategory}-${index}`}
+              className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col items-center group cursor-pointer"
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              layout
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                <Image src="/CALogo.png" alt="CA India Logo" width={160} height={160} className="object-contain" />
+              <motion.div className="flex justify-center items-center p-8" whileHover="hover" variants={logoVariants}>
+                <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                  <Image
+                    src={card.logo || "/placeholder.svg"}
+                    alt="Logo"
+                    width={160}
+                    height={160}
+                    className="object-contain"
+                  />
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                className="w-full bg-[#0052CC] text-white text-center py-4 text-lg font-bold relative overflow-hidden"
+                whileHover={{ backgroundColor: "#003d99" }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.span
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className="relative z-10">{card.title}</span>
               </motion.div>
             </motion.div>
-
-            <motion.div
-              className="w-full bg-[#0052CC] text-white text-center py-4 text-lg font-bold relative overflow-hidden"
-              whileHover={{ backgroundColor: "#003d99" }}
-            >
-              <motion.span
-                className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.3 }}
-              />
-              <span className="relative z-10">CA Foundation Exam</span>
-            </motion.div>
-          </motion.div>
-        ))}
+          ))}
+        </AnimatePresence>
       </motion.div>
+
+      {/* Floating Elements for Visual Appeal */}
+      <motion.div
+        className="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20"
+        animate={{
+          y: [0, -20, 0],
+          x: [0, 10, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-10 w-16 h-16 bg-purple-200 rounded-full opacity-20"
+        animate={{
+          y: [0, 20, 0],
+          x: [0, -10, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+      />
     </div>
   )
 }
