@@ -1,666 +1,468 @@
-// "use client";
+"use client"
 
-// import Link from "next/link";
-// import { useState } from "react";
-// import { ChevronDown, Menu, X } from "lucide-react";
-// import Image from "next/image";
-// import {
-//   SignInButton,
-//   SignUpButton,
-//   SignedIn,
-//   SignedOut,
-//   UserButton,
-//   useUser,
-// } from "@clerk/nextjs";
-
-// export default function Navbar() {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-//   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
-
-//   return (
-//     <div className="w-full pb-6">
-//       <div className="w-full bg-white shadow-sm">
-//       <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20">
-
-//           <div className="flex-shrink-0 pt-2">
-//             <Link href="/">
-//               <Image
-//                 src="/logo-top.png"
-//                 width={160}
-//                 height={60}
-//                 alt="logo"
-//                 className="object-cover"
-//               />
-//             </Link>
-//           </div>
-//           {/* Desktop Navigation */}
-//           <nav className="hidden md:flex md:items-center md:space-x-8 relative">
-//             <NavLink href="/" text="Home" />
-//             <div className="relative">
-//               <button
-//                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-//                 className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-//               >
-//                 Test Series
-//                 <ChevronDown
-//                   className={`ml-1 h-5 w-5 transform transition-transform duration-300 ${
-//                     isDropdownOpen ? "rotate-180" : ""
-//                   }`}
-//                 />
-//               </button>
-//               {isDropdownOpen && (
-//                 <div className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50">
-//                   {["ca", "cma", "cs"].map((type) => (
-//                     <Link
-//                       key={type}
-//                       href={`/test-series/${type}`}
-//                       className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
-//                     >
-//                       {type.toUpperCase()} Test Series
-//                     </Link>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//             <NavLink href="/counseling" text="Counseling" />
-//             <NavLink href="/blog" text="Blog" />
-//             <NavLink href="/about-us" text="About Us" />
-//             <NavLink href="/contact-us" text="Contact Us" />
-//           </nav>
-//           {/* Auth Buttons */}
-//           <div className="hidden md:flex md:items-center md:space-x-6">
-//             <Link
-//               href="/login"
-//               className="rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
-//             >
-//               Log in
-//             </Link>
-//             <Link
-//               href="/sign-up"
-//               className="rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
-//             >
-//               Get Started
-//             </Link>
-//           </div>
-//           {/* Mobile Menu Button */}
-//           <button
-//             className="md:hidden rounded-md p-2 text-gray-500 hover:bg-gray-100"
-//             onClick={() => setIsMenuOpen(!isMenuOpen)}
-//           >
-//             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Blue line separator */}
-//       <div className="h-1 w-full bg-blue-500"></div>
-
-//       {/* Mobile Menu */}
-//       {isMenuOpen && (
-//         <div className="md:hidden border-t border-gray-200 bg-white shadow-md">
-//           <div className="px-6 py-4 space-y-2">
-//             <MobileNavLink href="/" text="Home" />
-//             <div className="space-y-1">
-//               <button
-//                 onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
-//                 className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
-//               >
-//                 Test Series
-//                 <ChevronDown
-//                   className={`h-5 w-5 transform transition-transform duration-300 ${
-//                     isMobileDropdownOpen ? "rotate-180" : ""
-//                   }`}
-//                 />
-//               </button>
-//               {isMobileDropdownOpen && (
-//                 <div className="ml-4 space-y-2">
-//                   {["ca", "cma", "cs"].map((type) => (
-//                     <Link
-//                       key={type}
-//                       href={`/test-series/${type}`}
-//                       className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
-//                     >
-//                       {type.toUpperCase()} Test Series
-//                     </Link>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//             <MobileNavLink href="/counseling" text="Counseling" />
-//             <MobileNavLink href="/blog" text="Blog" />
-//             <MobileNavLink href="/about-us" text="About Us" />
-//             <MobileNavLink href="/contact-us" text="Contact Us" />
-//           </div>
-//           <div className="mt-6 border-t border-gray-200 px-6 py-6 space-y-4">
-//             <Link
-//               href="/login"
-//               className="block w-full rounded-md border border-gray-300 px-6 py-3 text-center text-base font-medium text-gray-700"
-//             >
-//               Log in
-//             </Link>
-//             <Link
-//               href="/test-series"
-//               className="block w-full rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white"
-//             >
-//               Get Started
-//             </Link>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// function NavLink({
-//   href,
-//   text,
-//   hasDropdown = false,
-// }: {
-//   href: string;
-//   text: string;
-//   hasDropdown?: boolean;
-// }) {
-//   return (
-//     <Link
-//       href={href}
-//       className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-//     >
-//       {text}
-//       {hasDropdown && <ChevronDown className="ml-1 h-5 w-5" />}
-//     </Link>
-//   );
-// }
-
-// function MobileNavLink({ href, text }: { href: string; text: string }) {
-//   return (
-//     <Link
-//       href={href}
-//       className="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-//     >
-//       {text}
-//     </Link>
-//   );
-// }
-
-// "use client";
-
-// import Link from "next/link";
-// import { useState } from "react";
-// import { ChevronDown, Menu, X } from "lucide-react";
-// import Image from "next/image";
-// import {
-//   SignInButton,
-//   SignUpButton,
-//   SignedIn,
-//   SignedOut,
-//   UserButton,
-// } from "@clerk/nextjs";
-
-// export default function Navbar() {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-//   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
-
-//   return (
-//     <div className="w-full pb-6">
-//       <div className="w-full bg-white shadow-sm">
-//         <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20">
-//           <div className="flex-shrink-0 pt-2">
-//             <Link href="/">
-//               <Image
-//                 src="/logo-top.png"
-//                 width={160}
-//                 height={60}
-//                 alt="logo"
-//                 className="object-cover"
-//               />
-//             </Link>
-//           </div>
-
-//           {/* Desktop Navigation */}
-//           <nav className="hidden md:flex md:items-center md:space-x-8 relative">
-//             <NavLink href="/" text="Home" />
-//             <div className="relative">
-//               <button
-//                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-//                 className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-//               >
-//                 Test Series
-//                 <ChevronDown
-//                   className={`ml-1 h-5 w-5 transform transition-transform duration-300 ${
-//                     isDropdownOpen ? "rotate-180" : ""
-//                   }`}
-//                 />
-//               </button>
-//               {isDropdownOpen && (
-//                 <div className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50">
-//                   {["ca", "cma", "cs"].map((type) => (
-//                     <Link
-//                       key={type}
-//                       href={`/test-series/${type}`}
-//                       className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
-//                     >
-//                       {type.toUpperCase()} Test Series
-//                     </Link>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//             <NavLink href="/counseling" text="Counseling" />
-//             <NavLink href="/blog" text="Blog" />
-//             <NavLink href="/about-us" text="About Us" />
-//             <NavLink href="/contact-us" text="Contact Us" />
-//           </nav>
-
-//           {/* Auth Buttons */}
-//           <div className="hidden md:flex md:items-center md:space-x-6">
-//             <SignedOut>
-//               <div className="flex gap-4">
-//                 <SignInButton mode="modal">
-//                   <button className="rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50">
-//                     Log in
-//                   </button>
-//                 </SignInButton>
-//                 <SignUpButton mode="modal">
-//                   <button className="rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700">
-//                     Get Started
-//                   </button>
-//                 </SignUpButton>
-//               </div>
-//             </SignedOut>
-//             <SignedIn>
-//               <UserButton afterSignOutUrl="/" />
-//             </SignedIn>
-//           </div>
-
-//           {/* Mobile Menu Button */}
-//           <button
-//             className="md:hidden rounded-md p-2 text-gray-500 hover:bg-gray-100"
-//             onClick={() => setIsMenuOpen(!isMenuOpen)}
-//           >
-//             {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Blue line separator */}
-//       <div className="h-1 w-full bg-blue-500"></div>
-
-//       {/* Mobile Menu */}
-//       {isMenuOpen && (
-//         <div className="md:hidden border-t border-gray-200 bg-white shadow-md">
-//           <div className="px-6 py-4 space-y-2">
-//             <MobileNavLink href="/" text="Home" />
-//             <div className="space-y-1">
-//               <button
-//                 onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
-//                 className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
-//               >
-//                 Test Series
-//                 <ChevronDown
-//                   className={`h-5 w-5 transform transition-transform duration-300 ${
-//                     isMobileDropdownOpen ? "rotate-180" : ""
-//                   }`}
-//                 />
-//               </button>
-//               {isMobileDropdownOpen && (
-//                 <div className="ml-4 space-y-2">
-//                   {["ca", "cma", "cs"].map((type) => (
-//                     <Link
-//                       key={type}
-//                       href={`/test-series/${type}`}
-//                       className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
-//                     >
-//                       {type.toUpperCase()} Test Series
-//                     </Link>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//             <MobileNavLink href="/counseling" text="Counseling" />
-//             <MobileNavLink href="/blog" text="Blog" />
-//             <MobileNavLink href="/about-us" text="About Us" />
-//             <MobileNavLink href="/contact-us" text="Contact Us" />
-//           </div>
-
-//           {/* Mobile Auth Buttons */}
-//           <div className="mt-6 border-t border-gray-200 px-6 py-6 space-y-4">
-//             <SignedOut>
-//               <SignInButton mode="modal">
-//                 <button className="block w-full rounded-md border border-gray-300 px-6 py-3 text-center text-base font-medium text-gray-700">
-//                   Log in
-//                 </button>
-//               </SignInButton>
-//               <SignUpButton mode="modal">
-//                 <button className="block w-full rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white">
-//                   Get Started
-//                 </button>
-//               </SignUpButton>
-//             </SignedOut>
-//             <SignedIn>
-//               <div className="flex justify-center">
-//                 <UserButton afterSignOutUrl="/" />
-//               </div>
-//             </SignedIn>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// function NavLink({
-//   href,
-//   text,
-//   hasDropdown = false,
-// }: {
-//   href: string;
-//   text: string;
-//   hasDropdown?: boolean;
-// }) {
-//   return (
-//     <Link
-//       href={href}
-//       className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-//     >
-//       {text}
-//       {hasDropdown && <ChevronDown className="ml-1 h-5 w-5" />}
-//     </Link>
-//   );
-// }
-
-// function MobileNavLink({ href, text }: { href: string; text: string }) {
-//   return (
-//     <Link
-//       href={href}
-//       className="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-//     >
-//       {text}
-//     </Link>
-//   );
-// }
-
-"use client";
-
-import Link from "next/link";
-import { useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
-import Image from "next/image";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
+import Link from "next/link"
+import { useState, useEffect } from "react"
+import { ChevronDown, Menu, X } from "lucide-react"
+import Image from "next/image"
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isTestDropdownOpen, setIsTestDropdownOpen] = useState(false);
-  const [isAcademyDropdownOpen, setIsAcademyDropdownOpen] = useState(false);
-  const [isMobileTestDropdownOpen, setIsMobileTestDropdownOpen] =
-    useState(false);
-  const [isMobileAcademyDropdownOpen, setIsMobileAcademyDropdownOpen] =
-    useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isTestDropdownOpen, setIsTestDropdownOpen] = useState(false)
+  const [isAcademyDropdownOpen, setIsAcademyDropdownOpen] = useState(false)
+  const [isMobileTestDropdownOpen, setIsMobileTestDropdownOpen] = useState(false)
+  const [isMobileAcademyDropdownOpen, setIsMobileAcademyDropdownOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { user } = useUser()
 
-  const { user } = useUser();
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [scrolled])
 
   return (
-    <div className="w-full pb-6">
-      <div className="w-full bg-white shadow-sm">
+    <motion.div
+      className="w-full pb-6 sticky top-0 z-50"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div
+        className={`w-full bg-white ${scrolled ? "shadow-md" : "shadow-sm"}`}
+        animate={{
+          boxShadow: scrolled ? "0 4px 6px -1px rgba(0, 0, 0, 0.1)" : "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+        }}
+        transition={{ duration: 0.3 }}
+      >
         <div className="flex h-20 items-center justify-between px-6 md:px-12 lg:px-20">
-          <div className="flex-shrink-0 pt-2">
-            <Link href="/">
-              <Image
-                src="/logo-top.png"
-                width={160}
-                height={60}
-                alt="logo"
-                className="object-cover"
-              />
-            </Link>
-          </div>
+          <motion.div
+            className="flex items-center"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <motion.div className="flex-shrink-0" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+              <Image src="/iceberg-icon.png" width={100} height={50} alt="icon" className="object-cover" />
+            </motion.div>
+            <motion.div className="flex-shrink-0 pt-2" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+              <Link href="/">
+                <Image src="/logo-top.png" width={160} height={80} alt="logo" className="object-cover" />
+              </Link>
+            </motion.div>
+          </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center md:space-x-8 relative">
+          <motion.nav
+            className="hidden md:flex md:items-center md:space-x-4 relative"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <NavLink href="/" text="Home" />
             <div className="relative">
-              <button
+              <motion.button
                 onClick={() => {
-                  setIsTestDropdownOpen(!isTestDropdownOpen);
-                  setIsAcademyDropdownOpen(false);
+                  setIsTestDropdownOpen(!isTestDropdownOpen)
+                  setIsAcademyDropdownOpen(false)
                 }}
                 className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Test Series
-                <ChevronDown
-                  className={`ml-1 h-5 w-5 transform transition-transform duration-300 ${
-                    isTestDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {isTestDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50">
-                  {["ca", "cma", "cs"].map((type) => (
-                    <Link
-                      key={type}
-                      href={`/test-series/${type}`}
-                      className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
-                    >
-                      {type.toUpperCase()} Test Series
-                    </Link>
-                  ))}
-                  <Link
-                    href="/test-series/free-mock-test"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
+                <motion.div animate={{ rotate: isTestDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                  <ChevronDown className="ml-1 h-5 w-5" />
+                </motion.div>
+              </motion.button>
+              <AnimatePresence>
+                {isTestDropdownOpen && (
+                  <motion.div
+                    className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50 overflow-hidden"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    Free Mock Test
-                  </Link>
-                </div>
-              )}
+                    {["ca", "cma", "cs"].map((type, index) => (
+                      <motion.div
+                        key={type}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                      >
+                        <Link
+                          href={`/test-series/${type}`}
+                          className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
+                        >
+                          {type.toUpperCase()} Test Series
+                        </Link>
+                      </motion.div>
+                    ))}
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.15 }}
+                    >
+                      <Link
+                        href="/test-series/free-mock-test"
+                        className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
+                      >
+                        Free Mock Test
+                      </Link>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <NavLink href="/counseling" text="Counseling" />
             <NavLink href="/blog" text="Blog" />
             <NavLink href="/lecture" text="Concept Videos" />
 
             <div className="relative">
-              <button
+              <motion.button
                 onClick={() => {
-                  setIsAcademyDropdownOpen(!isAcademyDropdownOpen);
-                  setIsTestDropdownOpen(false);
+                  setIsAcademyDropdownOpen(!isAcademyDropdownOpen)
+                  setIsTestDropdownOpen(false)
                 }}
                 className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Academy
-                <ChevronDown
-                  className={`ml-1 h-5 w-5 transform transition-transform duration-300 ${
-                    isAcademyDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {isAcademyDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50">
-                  <Link
-                    href="/about-us"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
+                <motion.div animate={{ rotate: isAcademyDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                  <ChevronDown className="ml-1 h-5 w-5" />
+                </motion.div>
+              </motion.button>
+              <AnimatePresence>
+                {isAcademyDropdownOpen && (
+                  <motion.div
+                    className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50 overflow-hidden"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    About Us
-                  </Link>
-                  <Link
-                    href="/career"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
-                  >
-                    Partner with Us
-                  </Link>
-                  <Link
-                    href="/contact-us"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
-                  >
-                    Contact Us
-                  </Link>
-                </div>
-              )}
+                    {[
+                      { href: "/about-us", text: "About Us" },
+                      { href: "/career", text: "Partner with Us" },
+                      { href: "/contact-us", text: "Contact Us" },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                      >
+                        <Link
+                          href={item.href}
+                          className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
+                        >
+                          {item.text}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </nav>
+          </motion.nav>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex md:items-center md:space-x-6">
+          <motion.div
+            className="hidden md:flex md:items-center md:space-x-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <SignedOut>
               <div className="flex gap-4">
                 <SignInButton mode="modal">
-                  <button className="rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                  <motion.button
+                    className="rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    whileHover={{ scale: 1.05, backgroundColor: "#f9fafb" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     Log in
-                  </button>
+                  </motion.button>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <button className="rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700">
-                    Get Started
-                  </button>
+                  <motion.button
+                    className="rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700 relative overflow-hidden"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "0%" }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <span className="relative z-10">Get Started</span>
+                  </motion.button>
                 </SignUpButton>
               </div>
             </SignedOut>
             <SignedIn>
-              <div className="flex items-center gap-3">
+              <motion.div
+                className="flex items-center gap-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 {user?.firstName && (
-                  <span className="text-sm text-gray-700 font-medium hidden lg:inline">
+                  <motion.span
+                    className="text-sm text-gray-700 font-medium hidden lg:inline"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
                     👋 Welcome, {user.firstName}
-                  </span>
+                  </motion.span>
                 )}
                 <UserButton afterSignOutUrl="/" />
-              </div>
+              </motion.div>
             </SignedIn>
-          </div>
+          </motion.div>
 
           {/* Mobile Menu Button */}
-          <button
+          <motion.button
             className="md:hidden rounded-md p-2 text-gray-500 hover:bg-gray-100"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            whileHover={{ backgroundColor: "#f3f4f6" }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+            <AnimatePresence mode="wait">
+              {isMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={28} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu size={28} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Blue line separator */}
-      <div className="h-1 w-full bg-blue-500"></div>
+      <motion.div
+        className="h-1 w-full bg-blue-500"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      />
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white shadow-md">
-          <div className="px-6 py-4 space-y-2">
-            <MobileNavLink href="/" text="Home" />
-            <div className="space-y-1">
-              <button
-                onClick={() =>
-                  setIsMobileTestDropdownOpen(!isMobileTestDropdownOpen)
-                }
-                className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
-              >
-                Test Series
-                <ChevronDown
-                  className={`h-5 w-5 transform transition-transform duration-300 ${
-                    isMobileTestDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {isMobileTestDropdownOpen && (
-                <div className="ml-4 space-y-2">
-                  {["ca", "cma", "cs"].map((type) => (
-                    <Link
-                      key={type}
-                      href={`/test-series/${type}`}
-                      className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="md:hidden border-t border-gray-200 bg-white shadow-md"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="px-6 py-4 space-y-2">
+              <MobileNavLink href="/" text="Home" />
+              <div className="space-y-1">
+                <motion.button
+                  onClick={() => setIsMobileTestDropdownOpen(!isMobileTestDropdownOpen)}
+                  className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Test Series
+                  <motion.div animate={{ rotate: isMobileTestDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                    <ChevronDown className="h-5 w-5" />
+                  </motion.div>
+                </motion.button>
+                <AnimatePresence>
+                  {isMobileTestDropdownOpen && (
+                    <motion.div
+                      className="ml-4 space-y-2"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      {type.toUpperCase()} Test Series
-                    </Link>
-                  ))}
-                  <Link
-                    href="/test-series/free-mock-test"
-                    className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
-                  >
-                    Free Mock Test
-                  </Link>
-                </div>
-              )}
-            </div>
-            <MobileNavLink href="/counseling" text="Counseling" />
-            <MobileNavLink href="/blog" text="Blog" />
-            <MobileNavLink href="/lecture" text="Concept Videos" />
-            <div className="space-y-1">
-              <button
-                onClick={() =>
-                  setIsMobileAcademyDropdownOpen(!isMobileAcademyDropdownOpen)
-                }
-                className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
-              >
-                Academy
-                <ChevronDown
-                  className={`h-5 w-5 transform transition-transform duration-300 ${
-                    isMobileAcademyDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {isMobileAcademyDropdownOpen && (
-                <div className="ml-4 space-y-2">
-                  <MobileNavLink href="/about-us" text="About Us" />
-                  <MobileNavLink href="/career" text="Career with Us" />
-                  <MobileNavLink href="/contact-us" text="Contact Us" />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Mobile Auth Buttons */}
-          <div className="mt-6 border-t border-gray-200 px-6 py-6 space-y-4">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="block w-full rounded-md border border-gray-300 px-6 py-3 text-center text-base font-medium text-gray-700">
-                  Log in
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="block w-full rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white">
-                  Get Started
-                </button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <div className="flex flex-col items-center space-y-2">
-                {user?.firstName && (
-                  <span className="text-sm text-gray-700 font-medium text-center">
-                    👋 Welcome, {user.firstName}
-                  </span>
-                )}
-                <UserButton afterSignOutUrl="/" />
+                      {["ca", "cma", "cs"].map((type, index) => (
+                        <motion.div
+                          key={type}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                        >
+                          <Link
+                            href={`/test-series/${type}`}
+                            className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
+                          >
+                            {type.toUpperCase()} Test Series
+                          </Link>
+                        </motion.div>
+                      ))}
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: 0.15 }}
+                      >
+                        <Link
+                          href="/test-series/free-mock-test"
+                          className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
+                        >
+                          Free Mock Test
+                        </Link>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </SignedIn>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+              <MobileNavLink href="/counseling" text="Counseling" />
+              <MobileNavLink href="/blog" text="Blog" />
+              <MobileNavLink href="/lecture" text="Concept Videos" />
+              <div className="space-y-1">
+                <motion.button
+                  onClick={() => setIsMobileAcademyDropdownOpen(!isMobileAcademyDropdownOpen)}
+                  className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Academy
+                  <motion.div
+                    animate={{ rotate: isMobileAcademyDropdownOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="h-5 w-5" />
+                  </motion.div>
+                </motion.button>
+                <AnimatePresence>
+                  {isMobileAcademyDropdownOpen && (
+                    <motion.div
+                      className="ml-4 space-y-2"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <MobileNavLink href="/about-us" text="About Us" />
+                      <MobileNavLink href="/career" text="Career with Us" />
+                      <MobileNavLink href="/contact-us" text="Contact Us" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Mobile Auth Buttons */}
+            <motion.div
+              className="mt-6 border-t border-gray-200 px-6 py-6 space-y-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <motion.button
+                    className="block w-full rounded-md border border-gray-300 px-6 py-3 text-center text-base font-medium text-gray-700"
+                    whileHover={{ scale: 1.02, backgroundColor: "#f9fafb" }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Log in
+                  </motion.button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <motion.button
+                    className="block w-full rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white relative overflow-hidden"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "0%" }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <span className="relative z-10">Get Started</span>
+                  </motion.button>
+                </SignUpButton>
+              </SignedOut>
+              <SignedIn>
+                <motion.div
+                  className="flex flex-col items-center space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  {user?.firstName && (
+                    <motion.span
+                      className="text-sm text-gray-700 font-medium text-center"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                      👋 Welcome, {user.firstName}
+                    </motion.span>
+                  )}
+                  <UserButton afterSignOutUrl="/" />
+                </motion.div>
+              </SignedIn>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
 }
 
 function NavLink({ href, text }: { href: string; text: string }) {
   return (
-    <Link
-      href={href}
-      className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-    >
-      {text}
-    </Link>
-  );
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Link
+        href={href}
+        className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
+      >
+        {text}
+      </Link>
+    </motion.div>
+  )
 }
 
 function MobileNavLink({ href, text }: { href: string; text: string }) {
   return (
-    <Link
-      href={href}
-      className="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
-    >
-      {text}
-    </Link>
-  );
+    <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+      <Link
+        href={href}
+        className="block px-4 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
+      >
+        {text}
+      </Link>
+    </motion.div>
+  )
 }

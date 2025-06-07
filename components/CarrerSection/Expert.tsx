@@ -1,50 +1,186 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { PlaneIcon as PaperPlaneIcon, FileTextIcon } from "lucide-react"
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 
 export default function ExpertTeamSection() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const textVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  }
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 1.1 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut",
+      },
+    },
+  }
+
   return (
-    <section className="relative mx-auto h-[662px] w-full max-w-7xl overflow-hidden">
+    <motion.section
+      className="relative mx-auto h-[662px] w-full max-w-7xl overflow-hidden"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
+    >
       {/* Background Image - Full width and height */}
-      <div className="absolute inset-0 z-0">
+      <motion.div className="absolute inset-0 z-0" variants={imageVariants} initial="hidden" animate="visible">
         <Image src="/expert-team.png" alt="Background image showing workspace" fill className="object-cover" priority />
-      </div>
+      </motion.div>
 
       {/* Rectangle overlay for the left half */}
-      <div className="absolute inset-y-0 left-0 z-10 w-2/3">
-        <Image src="/Rectangle.png" alt="White overlay background" fill className="object-cover opacity-85" priority />
-      </div>
+      <motion.div
+        className="absolute inset-y-0 left-0 z-10 w-2/3"
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 0.85, x: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+      >
+        <Image src="/Rectangle.png" alt="White overlay background" fill className="object-cover" priority />
+      </motion.div>
 
       {/* Content Container - Centered with margins */}
-      <div className="relative z-20 mx-auto h-full max-w-7xl px-8 md:px-12">
+      <motion.div
+        className="relative z-20 mx-auto h-full max-w-7xl px-8 md:px-12"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isLoaded ? "visible" : "hidden"}
+      >
         <div className="flex h-full items-center">
-          <div className="max-w-xl">
-            <h2 className="mb-4 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">Join Our Expert Team</h2>
-            <h3 className="mb-5 text-2xl font-semibold text-gray-800">Shape the Future of CA Education</h3>
-            <p className="mb-10 text-base leading-relaxed text-gray-700 md:text-lg lg:text-xl">
+          <motion.div className="max-w-xl" variants={textVariants}>
+            <motion.h2
+              className="mb-4 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl"
+              variants={textVariants}
+            >
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                Join Our{" "}
+              </motion.span>
+              <motion.span
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+              >
+                Expert Team
+              </motion.span>
+            </motion.h2>
+
+            <motion.h3
+              className="mb-5 text-2xl font-semibold text-gray-800"
+              variants={textVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            >
+              Shape the Future of CA Education
+            </motion.h3>
+
+            <motion.p
+              className="mb-10 text-base leading-relaxed text-gray-700 md:text-lg lg:text-xl"
+              variants={textVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+            >
               We&apos;re looking for experienced CA professionals to join our expert teaching team. Help us create high
               quality CA series and shape the next generation of chartered accountants.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap gap-6">
-              <Link
-                href="#apply"
-                className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 md:text-lg"
-              >
-                Apply Now
-                <PaperPlaneIcon className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#requirements"
-                className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 md:text-lg"
-              >
-                View Requirements
-                <FileTextIcon className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
+            <motion.div
+              className="flex flex-wrap gap-6"
+              variants={textVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
+            >
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href="#apply"
+                  className="inline-flex items-center gap-2 rounded-md bg-blue-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 md:text-lg relative overflow-hidden group"
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "0%" }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className="relative z-10">Apply Now</span>
+                  <motion.div
+                    className="relative z-10"
+                    animate={{
+                      x: [0, 5, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatType: "reverse",
+                    }}
+                  >
+                    <PaperPlaneIcon className="h-5 w-5" />
+                  </motion.div>
+                </Link>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href="#requirements"
+                  className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 md:text-lg"
+                >
+                  View Requirements
+                  <motion.div
+                    animate={{
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      repeatType: "reverse",
+                      delay: 0.5,
+                    }}
+                  >
+                    <FileTextIcon className="h-5 w-5" />
+                  </motion.div>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   )
 }
