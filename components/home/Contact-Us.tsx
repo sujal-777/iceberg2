@@ -1,11 +1,38 @@
 "use client"
 import { motion } from "framer-motion"
+import type React from "react"
+
 import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import { supabase } from "@/lib/supabaseClient"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Mail, Loader2, CheckCircle } from "lucide-react"
+
+interface FormData {
+  first_name: string
+  last_name: string
+  email: string
+  phone: string
+  additional: string
+}
 
 export default function Contact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const [formData, setFormData] = useState<FormData>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    additional: "",
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,11 +81,46 @@ export default function Contact() {
     },
   }
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setError(null)
+
+    try {
+      const { error } = await supabase.from("contact").insert([formData])
+
+      if (error) {
+        throw error
+      }
+
+      setIsSubmitted(true)
+      setFormData({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        additional: "",
+      })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-20 xl:px-32 2xl:px-40 bg-white py-12 overflow-hidden">
       <motion.div
         ref={ref}
-        className="w-full max-w-[1800px] grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
+        className="w-full max-w-[1800px] grid grid-cols-1 md:grid-cols-[58%_42%] gap-12 items-start"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -130,14 +192,14 @@ export default function Contact() {
 
           {/* Horizontal Cards Section */}
           <motion.div
-            className="mt-6 flex flex-col sm:flex-row sm:flex-wrap gap-4"
+            className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
             {/* Student Support */}
             <motion.div
-              className="bg-white p-6 rounded-lg w-full sm:w-[48%] lg:w-1/3 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition cursor-pointer"
+              className="bg-white p-6 rounded-lg flex-1 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition cursor-pointer w-full"
               variants={cardVariants}
               whileHover={{
                 scale: 1.02,
@@ -153,7 +215,7 @@ export default function Contact() {
 
             {/* Feedback and Suggestions */}
             <motion.div
-              className="bg-white p-6 rounded-lg w-full sm:w-[48%] lg:w-1/3 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition cursor-pointer"
+              className="bg-white p-6 rounded-lg flex-1 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition cursor-pointer w-full"
               variants={cardVariants}
               whileHover={{
                 scale: 1.02,
@@ -169,7 +231,7 @@ export default function Contact() {
 
             {/* Success Stories */}
             <motion.div
-              className="bg-white p-6 rounded-lg w-full sm:w-full lg:w-1/3 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition cursor-pointer"
+              className="bg-white p-6 rounded-lg flex-1 border border-transparent hover:border-blue-400 hover:bg-blue-50 transition cursor-pointer w-full"
               variants={cardVariants}
               whileHover={{
                 scale: 1.02,
@@ -190,9 +252,9 @@ export default function Contact() {
           </motion.div>
         </motion.div>
 
-        {/* Right Section - Zoho Form Embed */}
+        {/* Right Section - Custom Form */}
         <motion.div
-          className="bg-[#EEF6FF] rounded-lg p-6 sm:p-8 shadow-lg w-full"
+          className="bg-[#EEF6FF] rounded-lg p-8 shadow-lg w-full min-h-[600px]"
           variants={slideInRight}
           whileHover={{
             scale: 1.01,
@@ -200,16 +262,120 @@ export default function Contact() {
           }}
           transition={{ duration: 0.3 }}
         >
-          <motion.iframe
-            src="https://forms.zohopublic.in/temp77261gm1/form/ContactUs/formperma/0AfcmeoQrO6xqt_X4H_SZTojLn0IXMq6bzvzCEy7ZuY"
-            width="100%"
-            height="700px"
-            className="border-none w-full rounded-md mt-4"
-            allowFullScreen
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-          />
+          >
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">Get in Touch</h2>
+            <p className="text-gray-600 mb-6">You can reach us anytime</p>
+
+            {isSubmitted ? (
+              <motion.div
+                className="text-center py-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Thank you!</h3>
+                <p className="text-gray-600">Your message has been sent successfully. We'll get back to you soon.</p>
+                <Button onClick={() => setIsSubmitted(false)} variant="outline" className="mt-4">
+                  Send Another Message
+                </Button>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                    <Input
+                      type="text"
+                      name="first_name"
+                      placeholder="First Name"
+                      value={formData.first_name}
+                      onChange={handleInputChange}
+                      required
+                      className="bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500 h-12 text-base"
+                    />
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                    <Input
+                      type="text"
+                      name="last_name"
+                      placeholder="Last Name"
+                      value={formData.last_name}
+                      onChange={handleInputChange}
+                      required
+                      className="bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500 h-12 text-base"
+                    />
+                  </motion.div>
+                </div>
+
+                <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }} className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Your email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500 pl-10 h-12 text-base"
+                  />
+                </motion.div>
+
+                <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                  <Input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone number"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500 h-12 text-base"
+                  />
+                </motion.div>
+
+                <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
+                  <Textarea
+                    name="additional"
+                    placeholder="How can we help you?"
+                    value={formData.additional}
+                    onChange={handleInputChange}
+                    rows={5}
+                    className="bg-white border-gray-200 focus:border-blue-500 focus:ring-blue-500 resize-none text-base"
+                  />
+                </motion.div>
+
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-600 text-sm bg-red-50 p-3 rounded-md"
+                  >
+                    {error}
+                  </motion.div>
+                )}
+
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-md font-medium transition-colors text-lg"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit"
+                    )}
+                  </Button>
+                </motion.div>
+              </form>
+            )}
+          </motion.div>
         </motion.div>
       </motion.div>
     </div>

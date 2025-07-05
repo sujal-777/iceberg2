@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function CAExamHero() {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true)
-  }, [])
+    setIsLoaded(true);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -21,7 +21,7 @@ export default function CAExamHero() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const textVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -33,7 +33,7 @@ export default function CAExamHero() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.8, rotate: 0 },
@@ -45,7 +45,7 @@ export default function CAExamHero() {
         ease: "easeOut",
       },
     },
-  }
+  };
 
   const floatingAnimation = {
     y: [-10, 10, -10],
@@ -54,7 +54,7 @@ export default function CAExamHero() {
       repeat: Number.POSITIVE_INFINITY,
       ease: "easeInOut",
     },
-  }
+  };
 
   // Floating elements data
   const floatingElements = [
@@ -135,7 +135,7 @@ export default function CAExamHero() {
       duration: 5,
       delay: 1.5,
     },
-  ]
+  ];
 
   return (
     <section className="w-full bg-white py-12 md:py-16 lg:py-20 overflow-hidden relative">
@@ -211,7 +211,8 @@ export default function CAExamHero() {
         />
       ))}
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+
+      <div className="container mx-auto px-6 lg:px-28 relative z-10">
         <motion.div
           className="grid items-center gap-12 lg:grid-cols-2"
           variants={containerVariants}
@@ -221,7 +222,7 @@ export default function CAExamHero() {
           {/* Text Content */}
           <motion.div className="space-y-6 max-w-2xl" variants={textVariants}>
             <motion.h1
-              className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl leading-tight"
+              className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl leading-tight"
               variants={textVariants}
             >
               <motion.span
@@ -242,12 +243,22 @@ export default function CAExamHero() {
               </motion.span>
             </motion.h1>
 
-            <motion.p className="text-gray-600 text-lg sm:text-xl" variants={textVariants}>
-              Get access to top-quality test series, expert counseling and study materials to ensure your success
+            <motion.p
+              className="text-gray-600 text-lg sm:text-xl"
+              variants={textVariants}
+            >
+              Get access to top-quality test series, expert counseling and study
+              materials to ensure your success
             </motion.p>
 
-            <motion.div className="flex flex-col sm:flex-row gap-4" variants={textVariants}>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              variants={textVariants}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button className="bg-blue-600 hover:bg-blue-700 relative overflow-hidden group">
                   <motion.span
                     className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700"
@@ -259,9 +270,15 @@ export default function CAExamHero() {
                 </Button>
               </motion.div>
 
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <a href="/counseling" tabIndex={-1}>
-                  <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+                  <Button
+                    variant="outline"
+                    className="border-blue-600 text-blue-600 hover:bg-blue-50"
+                  >
                     Book an Appointment
                   </Button>
                 </a>
@@ -271,7 +288,7 @@ export default function CAExamHero() {
 
           {/* Image Stack - Adjusted size */}
           <motion.div
-            className="relative w-full flex items-center justify-center h-[320px] sm:h-[380px] md:h-[450px] lg:h-[520px]"
+            className="relative w-full flex items-center justify-center h-[280px] sm:h-[340px] md:h-[400px] lg:h-[480px]"
             variants={imageVariants}
           >
             {/* Left Image */}
@@ -287,14 +304,14 @@ export default function CAExamHero() {
               }}
             >
               <motion.div
-                className="w-[120px] h-[220px] sm:w-[160px] sm:h-[280px] md:w-[200px] md:h-[360px] lg:w-[260px] lg:h-[520px] overflow-hidden rounded-xl shadow-lg"
+                className="w-[100px] h-[200px] sm:w-[140px] sm:h-[260px] md:w-[180px] md:h-[320px] lg:w-[230px] lg:h-[460px] overflow-hidden rounded-xl shadow-lg"
                 animate={floatingAnimation}
               >
                 <Image
                   src="/header-1.png"
                   alt="Student Left"
-                  width={260}
-                  height={520}
+                  width={230}
+                  height={460}
                   className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
                   priority
                 />
@@ -307,13 +324,10 @@ export default function CAExamHero() {
               initial={{ opacity: 0, y: 50, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1.05 }}
               transition={{ duration: 1, delay: 0.5 }}
-              whileHover={{
-                scale: 1.1,
-                transition: { duration: 0.3 },
-              }}
+              whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
             >
               <motion.div
-                className="w-[130px] h-[230px] sm:w-[170px] sm:h-[290px] md:w-[220px] md:h-[380px] lg:w-[260px] lg:h-[520px] overflow-hidden rounded-xl shadow-2xl rotate-3"
+                className="w-[110px] h-[210px] sm:w-[150px] sm:h-[270px] md:w-[200px] md:h-[340px] lg:w-[240px] lg:h-[480px] overflow-hidden rounded-xl shadow-2xl rotate-3"
                 animate={{
                   y: [-5, 5, -5],
                   rotate: [3, 1, 3],
@@ -327,8 +341,8 @@ export default function CAExamHero() {
                 <Image
                   src="/header-2.png"
                   alt="Student Middle"
-                  width={260}
-                  height={520}
+                  width={240}
+                  height={480}
                   className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
                   priority
                 />
@@ -348,10 +362,8 @@ export default function CAExamHero() {
               }}
             >
               <motion.div
-                className="w-[120px] h-[220px] sm:w-[160px] sm:h-[280px] md:w-[200px] md:h-[360px] lg:w-[260px] lg:h-[520px] overflow-hidden rounded-xl shadow-lg"
-                animate={{
-                  y: [10, -10, 10],
-                }}
+                className="w-[100px] h-[200px] sm:w-[140px] sm:h-[260px] md:w-[180px] md:h-[320px] lg:w-[230px] lg:h-[460px] overflow-hidden rounded-xl shadow-lg"
+                animate={{ y: [10, -10, 10] }}
                 transition={{
                   duration: 4.5,
                   repeat: Number.POSITIVE_INFINITY,
@@ -361,8 +373,8 @@ export default function CAExamHero() {
                 <Image
                   src="/header-3.png"
                   alt="Student Right"
-                  width={260}
-                  height={520}
+                  width={230}
+                  height={460}
                   className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
                   priority
                 />
@@ -372,5 +384,5 @@ export default function CAExamHero() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

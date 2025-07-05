@@ -1,7 +1,7 @@
 import Expert from "@/components/CarrerSection/Expert";
 import Requirement from "@/components/CarrerSection/Requirement";
 import JobApplication from "@/components/CarrerSection/Apply"
-import { motion } from "framer-motion"
+// import { motion } from "framer-motion"
 
 export default function PAGE() {
     return (

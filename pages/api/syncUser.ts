@@ -13,7 +13,7 @@ export const syncUserWithBackend = async (user: any) => {
   };
 
   try {
-    await axios.post("http://localhost:5000/api/auth/sync-user", userData);
+    await axios.post("http://localhost:7000/api/auth/sync-user", userData);
     console.log("✅ Synced user with backend");
   } catch (error) {
     console.error("Failed to sync user with backend:", error);
