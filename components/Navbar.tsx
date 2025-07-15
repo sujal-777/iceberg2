@@ -1,36 +1,55 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-import { ChevronDown, Menu, X } from "lucide-react"
-import Image from "next/image"
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs"
-import { motion, AnimatePresence } from "framer-motion"
-import { FiHome } from "react-icons/fi"
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiHome } from "react-icons/fi";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isTestDropdownOpen, setIsTestDropdownOpen] = useState(false)
-  const [isAcademyDropdownOpen, setIsAcademyDropdownOpen] = useState(false)
-  const [isMobileTestDropdownOpen, setIsMobileTestDropdownOpen] = useState(false)
-  const [isMobileAcademyDropdownOpen, setIsMobileAcademyDropdownOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { user } = useUser()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTestDropdownOpen, setIsTestDropdownOpen] = useState(false);
+  const [isAcademyDropdownOpen, setIsAcademyDropdownOpen] = useState(false);
+  const [isMobileTestDropdownOpen, setIsMobileTestDropdownOpen] =
+    useState(false);
+  const [isMobileAcademyDropdownOpen, setIsMobileAcademyDropdownOpen] =
+    useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { user } = useUser();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((err) => console.error("Error fetching categories", err));
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10
+      const isScrolled = window.scrollY > 10;
       if (isScrolled !== scrolled) {
-        setScrolled(isScrolled)
+        setScrolled(isScrolled);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [scrolled])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled]);
 
   return (
     <motion.div
@@ -42,7 +61,9 @@ export default function Navbar() {
       <motion.div
         className={`w-full bg-white ${scrolled ? "shadow-md" : "shadow-sm"}`}
         animate={{
-          boxShadow: scrolled ? "0 4px 6px -1px rgba(0, 0, 0, 0.1)" : "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+          boxShadow: scrolled
+            ? "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+            : "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
         }}
         transition={{ duration: 0.3 }}
       >
@@ -53,12 +74,32 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <motion.div className="flex-shrink-0" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-              <Image src="/iceberg-icon.png" width={100} height={50} alt="icon" className="object-cover" />
+            <motion.div
+              className="flex-shrink-0"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Image
+                src="/iceberg-icon.png"
+                width={100}
+                height={50}
+                alt="icon"
+                className="object-cover"
+              />
             </motion.div>
-            <motion.div className="flex-shrink-0 pt-2" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+            <motion.div
+              className="flex-shrink-0 pt-2"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
               <Link href="/">
-                <Image src="/logo-top.png" width={160} height={80} alt="logo" className="object-cover" />
+                <Image
+                  src="/logo-top.png"
+                  width={160}
+                  height={80}
+                  alt="logo"
+                  className="object-cover"
+                />
               </Link>
             </motion.div>
           </motion.div>
@@ -73,55 +114,45 @@ export default function Navbar() {
             <NavLink href="/" text="Home" />
             <div className="relative">
               <motion.button
-                onClick={() => {
-                  setIsTestDropdownOpen(!isTestDropdownOpen)
-                  setIsAcademyDropdownOpen(false)
-                }}
+                onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Test Series
-                <motion.div animate={{ rotate: isTestDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                <motion.div
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <ChevronDown className="ml-1 h-5 w-5" />
                 </motion.div>
               </motion.button>
+
               <AnimatePresence>
-                {isTestDropdownOpen && (
+                {isOpen && (
                   <motion.div
-                    className="absolute left-0 mt-2 w-52 rounded-md bg-white shadow-lg z-50 overflow-hidden"
+                    className="absolute left-0 mt-2 w-60 rounded-md bg-white shadow-lg z-50 overflow-hidden"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {["ca", "cma", "cs"].map((type, index) => (
+                    {categories.map((cat: any, index: number) => (
                       <motion.div
-                        key={type}
+                        key={cat._id}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.05 }}
                       >
                         <Link
-                          href={`/test-series/${type}`}
+                          href={`/category/${cat._id}`}
                           className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
+                          onClick={() => setIsOpen(false)}
                         >
-                          {type.toUpperCase()} Test Series
+                          {cat.name}
                         </Link>
                       </motion.div>
                     ))}
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: 0.15 }}
-                    >
-                      <Link
-                        href="/test-series/free-mock-test"
-                        className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300"
-                      >
-                        Free Mock Test
-                      </Link>
-                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -133,15 +164,18 @@ export default function Navbar() {
             <div className="relative">
               <motion.button
                 onClick={() => {
-                  setIsAcademyDropdownOpen(!isAcademyDropdownOpen)
-                  setIsTestDropdownOpen(false)
+                  setIsAcademyDropdownOpen(!isAcademyDropdownOpen);
+                  setIsTestDropdownOpen(false);
                 }}
                 className="flex items-center px-3 py-3 text-lg font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Academy
-                <motion.div animate={{ rotate: isAcademyDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                <motion.div
+                  animate={{ rotate: isAcademyDropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <ChevronDown className="ml-1 h-5 w-5" />
                 </motion.div>
               </motion.button>
@@ -215,34 +249,33 @@ export default function Navbar() {
               </div>
             </SignedOut>
             <SignedIn>
-  <motion.div
-    className="flex items-center gap-3"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5, delay: 0.4 }}
-  >
-    {user?.firstName && (
-      <motion.span
-        className="text-sm text-gray-700 font-medium hidden lg:inline"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        👋 Welcome, {user.firstName}
-      </motion.span>
-    )}
-    <UserButton>
-        <UserButton.MenuItems>
-          <UserButton.Link
-            label="Dashboard"
-            labelIcon={<FiHome />}
-            href="/dashboard"
-          />
-        </UserButton.MenuItems>
-      </UserButton>
-  </motion.div>
-</SignedIn>
-
+              <motion.div
+                className="flex items-center gap-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                {user?.firstName && (
+                  <motion.span
+                    className="text-sm text-gray-700 font-medium hidden lg:inline"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    👋 Welcome, {user.firstName}
+                  </motion.span>
+                )}
+                <UserButton>
+                  <UserButton.MenuItems>
+                    <UserButton.Link
+                      label="Dashboard"
+                      labelIcon={<FiHome />}
+                      href="/dashboard"
+                    />
+                  </UserButton.MenuItems>
+                </UserButton>
+              </motion.div>
+            </SignedIn>
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -304,13 +337,18 @@ export default function Navbar() {
               <MobileNavLink href="/" text="Home" />
               <div className="space-y-1">
                 <motion.button
-                  onClick={() => setIsMobileTestDropdownOpen(!isMobileTestDropdownOpen)}
+                  onClick={() =>
+                    setIsMobileTestDropdownOpen(!isMobileTestDropdownOpen)
+                  }
                   className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
                   Test Series
-                  <motion.div animate={{ rotate: isMobileTestDropdownOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                  <motion.div
+                    animate={{ rotate: isMobileTestDropdownOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <ChevronDown className="h-5 w-5" />
                   </motion.div>
                 </motion.button>
@@ -359,7 +397,9 @@ export default function Navbar() {
               <MobileNavLink href="/lecture" text="Concept Videos" />
               <div className="space-y-1">
                 <motion.button
-                  onClick={() => setIsMobileAcademyDropdownOpen(!isMobileAcademyDropdownOpen)}
+                  onClick={() =>
+                    setIsMobileAcademyDropdownOpen(!isMobileAcademyDropdownOpen)
+                  }
                   className="flex w-full justify-between items-center px-4 py-3 text-lg font-medium text-gray-700"
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
@@ -448,7 +488,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </motion.div>
-  )
+  );
 }
 
 function NavLink({ href, text }: { href: string; text: string }) {
@@ -461,7 +501,7 @@ function NavLink({ href, text }: { href: string; text: string }) {
         {text}
       </Link>
     </motion.div>
-  )
+  );
 }
 
 function MobileNavLink({ href, text }: { href: string; text: string }) {
@@ -474,5 +514,5 @@ function MobileNavLink({ href, text }: { href: string; text: string }) {
         {text}
       </Link>
     </motion.div>
-  )
+  );
 }
