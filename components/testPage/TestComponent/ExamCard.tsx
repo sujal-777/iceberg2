@@ -29,7 +29,7 @@ export default function ExamsByCategoryPage() {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/exams");
+        const res = await fetch("http://localhost:5000/api/exams");
         const data = await res.json();
         const filtered = data.filter(
           (exam: Exam) => exam.categoryId?._id === categoryId

@@ -24,7 +24,7 @@ export default function ExamInstructionsPage() {
   useEffect(() => {
     async function fetchTestDetails() {
       try {
-        const res = await fetch(`http://localhost:8000/api/test-series/${testSeriesId}`);
+        const res = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}`);
         const data = await res.json();
         setTestData(data);
       } catch (err) {

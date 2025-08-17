@@ -17,7 +17,7 @@ const TestSeriesList = () => {
   useEffect(() => {
     const fetchTestSeries = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/test-series");
+        const res = await fetch("http://localhost:5000/api/test-series");
         const allTests = await res.json();
 
         const filtered = allTests.filter(

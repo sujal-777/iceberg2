@@ -485,7 +485,7 @@ export default function MockTestPage() {
       setPdfLoading(true)
       setPdfError("")
 
-      const response = await fetch(`http://localhost:8000/api/test-series/${testSeriesId}/pdf-url`)
+      const response = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/pdf-url`)
 
       if (!response.ok) {
         throw new Error("Failed to fetch PDF URL")
@@ -545,7 +545,7 @@ export default function MockTestPage() {
     const fetchQuestions = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`http://localhost:8000/api/test-series/${testSeriesId}/questions`)
+        const response = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/questions`)
 
         if (!response.ok) {
           throw new Error("Failed to fetch questions")
@@ -621,7 +621,7 @@ export default function MockTestPage() {
   // Fetch individual question (optional - for detailed view)
   const fetchIndividualQuestion = async (questionId: string) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/test-series/${testSeriesId}/questions/${questionId}`)
+      const response = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/questions/${questionId}`)
       if (response.ok) {
         const questionData = await response.json()
         console.log("Individual question data:", questionData)
