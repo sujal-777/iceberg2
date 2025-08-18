@@ -265,6 +265,8 @@ import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Switch } from "@/components/ui/switch"
+
+import { useUser } from "@clerk/nextjs";
 import {
   RotateCcw,
   ChevronLeft,
@@ -279,6 +281,7 @@ import {
 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 
+import { useRouter } from "next/navigation";
 interface Question {
   _id: string
   question: string
@@ -298,6 +301,7 @@ interface PdfResponse {
 }
 
 export default function MockTestPage() {
+  const router = useRouter();
   // Get URL parameters
   const searchParams = useSearchParams()
   const testSeriesId = searchParams?.get("testSeriesId") || "68690b00c6bece85820cb9d6"
@@ -540,8 +544,49 @@ export default function MockTestPage() {
     })
   }
 
+// const { user } = useUser();
+//   const userId = user?.id
+  
   // Fetch questions on component mount
   useEffect(() => {
+    const userId = localStorage.getItem("userId");
+console.log(userId);
+
+    console.log(testSeriesId , "new/attempt")
+    // apply for test 
+ const handleStartExam = async () => {
+  console.log(userId)
+
+ console.log(userId, 'User ID for exam attempt'); // Log user ID for debugging
+console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series ID for debugging
+  try {
+    // 1. Get user email from backend using clerkId (userId here is ClerkId)
+    const emailRes = await fetch(`http://localhost:5000/api/auth/get-email/${userId}`);
+    const emailData = await emailRes.json();
+
+    if (!emailData.email) {
+      console.error("Email not found for this user");
+      return;
+    }
+console.log("User email:", emailData.email);
+    // 2. Apply for the test
+    const applyRes = await fetch("http://localhost:5000/api/apply/apply-test", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: emailData.email,
+        testId: testSeriesId, // ⚡ examId here should match your Test _id (not attempt id)
+      }),
+    });
+
+    const applyData = await applyRes.json();
+    console.log("Apply test response:", applyData);
+  } catch (err) {
+    console.error("Error in handleStartExam:", err);
+  }
+};
+handleStartExam();
+  // end apply for test 
     const fetchQuestions = async () => {
       try {
         setLoading(true)
@@ -721,47 +766,109 @@ export default function MockTestPage() {
     }
   }
 
-  const handleSubmitExam = async () => {
-    try {
-      setSubmitting(true)
+  // const handleSubmitExam = async () => {
+  //   try {
+  //     setSubmitting(true)
 
-      // Prepare submission data
-      const submissionData = {
-        testSeriesId,
-        answers,
-        questionStatus,
-        selectedFiles: selectedFiles.map((f) => f.name), // File names for reference
-        timeSpent: 10800 - timeLeft,
-        submittedAt: new Date().toISOString(),
-      }
+  //     // Prepare submission data
+  //     const submissionData = {
+  //       testSeriesId,
+  //       answers,
+  //       questionStatus,
+  //       selectedFiles: selectedFiles.map((f) => f.name), // File names for reference
+  //       timeSpent: 10800 - timeLeft,
+  //       submittedAt: new Date().toISOString(),
+  //     }
 
-      console.log("Submitting exam with data:", submissionData)
+  //     console.log("Submitting exam with data:", submissionData)
 
-      // Here you would typically send to your submission API
-      // const response = await fetch('/api/submit-exam', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(submissionData)
-      // })
+  //     // Here you would typically send to your submission API
+  //     // const response = await fetch('/api/submit-exam', {
+  //     //   method: 'POST',
+  //     //   headers: { 'Content-Type': 'application/json' },
+  //     //   body: JSON.stringify(submissionData)
+  //     // })
 
-      toast({
-        title: "Exam Submitted",
-        description: "Your exam has been submitted successfully!",
-      })
+  //     toast({
+  //       title: "Exam Submitted",
+  //       description: "Your exam has been submitted successfully!",
+  //     })
 
-      // Redirect to results or confirmation page
-      // window.location.href = '/exam-results'
-    } catch (error) {
-      console.error("Submission error:", error)
+  //     // Redirect to results or confirmation page
+  //     // window.location.href = '/exam-results'
+  //   } catch (error) {
+  //     console.error("Submission error:", error)
+  //     toast({
+  //       title: "Error",
+  //       description: "Failed to submit exam. Please try again.",
+  //       variant: "destructive",
+  //     })
+  //   } finally {
+  //     setSubmitting(false)
+  //   }
+  // }
+const handleSubmitExam = async () => {
+  try {
+    setSubmitting(true);
+
+    // ✅ Get userId from localStorage
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
       toast({
         title: "Error",
-        description: "Failed to submit exam. Please try again.",
+        description: "User ID not found. Please login again.",
         variant: "destructive",
-      })
-    } finally {
-      setSubmitting(false)
+      });
+      return;
     }
+
+    // ✅ Prepare submission JSON
+    const submissionData = {
+      userId,
+      testId: testSeriesId, // using testSeriesId as your backend expects testId
+      answers, // already an array of answers
+    };
+
+    console.log("Submitting exam with data:", submissionData);
+
+    // ✅ Call backend
+    const response = await fetch("http://localhost:5000/api/apply/submit-test", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(submissionData),
+    });
+
+    const result = await response.json();
+    console.log("Submit response:", result);
+
+    if (response.ok) {
+      toast({
+        title: "Exam Submitted",
+        description: `Your exam has been submitted successfully! Score: ${result.score}`,
+      });
+
+      // Redirect to results page
+      router.push(`/`)
+    } else {
+      toast({
+        title: "Error",
+        description: result.error || "Failed to submit exam.",
+        variant: "destructive",
+      });
+    }
+  } catch (error) {
+    console.error("Submission error:", error);
+    toast({
+      title: "Error",
+      description: "Failed to submit exam. Please try again.",
+      variant: "destructive",
+    });
+  } finally {
+    setSubmitting(false);
   }
+};
+
 
   if (loading) {
     return (

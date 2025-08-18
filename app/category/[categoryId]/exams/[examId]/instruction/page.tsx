@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+
+import { useUser } from "@clerk/nextjs";
 import {
   ChevronLeft,
   HelpCircle,
@@ -20,8 +22,12 @@ export default function ExamInstructionsPage() {
   const router = useRouter();
   const [agreed, setAgreed] = useState(false);
   const [testData, setTestData] = useState<any>(null);
-
+const { user } = useUser();
+  const userId = user?.id
+  
+localStorage.setItem("userId", String(userId));
   useEffect(() => {
+    console.log(testSeriesId)
     async function fetchTestDetails() {
       try {
         const res = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}`);
@@ -40,8 +46,47 @@ export default function ExamInstructionsPage() {
 
   const handleStartExam = () => {
     if (!agreed) return;
+    
     router.push(`/category/${categoryId}/exams/${examId}/attempt`);
+    // console.log(userId, 'User ID for exam attempt'); // Log user ID for debugging
+    // console.log(examId, 'Exam ID for attempt'); // Log exam ID for debugging
   };
+// const handleStartExam = async () => {
+//   if (!agreed) return;
+//  console.log(userId, 'User ID for exam attempt'); // Log user ID for debugging
+//     console.log(examId, 'Exam ID for attempt'); // Log exam ID for debugging
+// console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series ID for debugging
+//   try {
+//     // 1. Get user email from backend using clerkId (userId here is ClerkId)
+//     const emailRes = await fetch(`http://localhost:5000/api/auth/get-email/${userId}`);
+//     const emailData = await emailRes.json();
+
+//     if (!emailData.email) {
+//       console.error("Email not found for this user");
+//       return;
+//     }
+// console.log("User email:", emailData.email);
+//     // 2. Apply for the test
+//     const applyRes = await fetch("http://localhost:5000/api/apply/apply-test", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         email: emailData.email,
+//         testId: testSeriesId, // ⚡ examId here should match your Test _id (not attempt id)
+//       }),
+//     });
+
+//     const applyData = await applyRes.json();
+//     console.log("Apply test response:", applyData);
+
+//     // 3. Navigate to exam attempt page
+//     if (applyRes.ok) {
+//       router.push(`/category/${categoryId}/exams/${examId}/attempt`);
+//     }
+//   } catch (err) {
+//     console.error("Error in handleStartExam:", err);
+//   }
+// };
 
   return (
     <div className="max-w-4xl mx-auto bg-white shadow-sm rounded-lg overflow-hidden">
