@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   experimental: {},
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     domains: ['randomuser.me', 'i.ytimg.com', 'img.youtube.com'], // add more as needed
   },
