@@ -566,9 +566,12 @@ console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series
 
     if (!emailData.email) {
       console.error("Email not found for this user");
+      
       return;
     }
-console.log("User email:", emailData.email);
+    
+localStorage.setItem("user_Id", String(emailData.userId));
+console.log("User _id:", emailData.userId);
     // 2. Apply for the test
     const applyRes = await fetch("http://localhost:5000/api/apply/apply-test", {
       method: "POST",
@@ -812,7 +815,7 @@ const handleSubmitExam = async () => {
     setSubmitting(true);
 
     // ✅ Get userId from localStorage
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("user_Id");
 
     if (!userId) {
       toast({
