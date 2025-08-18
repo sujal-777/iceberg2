@@ -30,7 +30,7 @@ localStorage.setItem("userId", String(userId));
     console.log(testSeriesId)
     async function fetchTestDetails() {
       try {
-        const res = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}`);
+        const res = await fetch(`https://icebreg-backend2.onrender.com/api/test-series/${testSeriesId}`);
         const data = await res.json();
         setTestData(data);
       } catch (err) {
@@ -58,7 +58,7 @@ localStorage.setItem("userId", String(userId));
 // console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series ID for debugging
 //   try {
 //     // 1. Get user email from backend using clerkId (userId here is ClerkId)
-//     const emailRes = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/auth/get-email/${userId}`);
+//     const emailRes = await fetch(`https://icebreg-backend2.onrender.com/api/auth/get-email/${userId}`);
 //     const emailData = await emailRes.json();
 
 //     if (!emailData.email) {
@@ -67,7 +67,7 @@ localStorage.setItem("userId", String(userId));
 //     }
 // console.log("User email:", emailData.email);
 //     // 2. Apply for the test
-//     const applyRes = await fetch("https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/apply/apply-test", {
+//     const applyRes = await fetch("https://icebreg-backend2.onrender.com/api/apply/apply-test", {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify({

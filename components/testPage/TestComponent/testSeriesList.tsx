@@ -17,7 +17,7 @@ const TestSeriesList = () => {
   useEffect(() => {
     const fetchTestSeries = async () => {
       try {
-        const res = await fetch("https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series");
+        const res = await fetch("https://icebreg-backend2.onrender.com/api/test-series");
         const allTests = await res.json();
 
         const filtered = allTests.filter(

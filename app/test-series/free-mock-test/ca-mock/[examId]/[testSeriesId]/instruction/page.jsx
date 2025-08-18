@@ -22,7 +22,7 @@ export default function ExamInstructionsPage() {
   useEffect(() => {
     async function fetchTitle() {
       try {
-        const res = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}`);
+        const res = await fetch(`https://icebreg-backend2.onrender.com/api/test-series/${testSeriesId}`);
         const data = await res.json();
         setTestTitle(data.title || 'Test Instructions');
       } catch (err) {

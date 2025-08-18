@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/:path*', // Proxy to backend
+        destination: 'https://icebreg-backend2.onrender.com/api/:path*', // Proxy to backend
       },
     ];
   },

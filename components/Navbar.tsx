@@ -30,7 +30,7 @@ export default function Navbar() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/categories")
+    fetch("https://icebreg-backend2.onrender.com/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch((err) => console.error("Error fetching categories", err));
