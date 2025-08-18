@@ -489,7 +489,7 @@ export default function MockTestPage() {
       setPdfLoading(true)
       setPdfError("")
 
-      const response = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/pdf-url`)
+      const response = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}/pdf-url`)
 
       if (!response.ok) {
         throw new Error("Failed to fetch PDF URL")
@@ -561,7 +561,7 @@ console.log(userId);
 console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series ID for debugging
   try {
     // 1. Get user email from backend using clerkId (userId here is ClerkId)
-    const emailRes = await fetch(`http://localhost:5000/api/auth/get-email/${userId}`);
+    const emailRes = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/auth/get-email/${userId}`);
     const emailData = await emailRes.json();
 
     if (!emailData.email) {
@@ -573,7 +573,7 @@ console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series
 localStorage.setItem("user_Id", String(emailData.userId));
 console.log("User _id:", emailData.userId);
     // 2. Apply for the test
-    const applyRes = await fetch("http://localhost:5000/api/apply/apply-test", {
+    const applyRes = await fetch("https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/apply/apply-test", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -593,7 +593,7 @@ handleStartExam();
     const fetchQuestions = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/questions`)
+        const response = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}/questions`)
 
         if (!response.ok) {
           throw new Error("Failed to fetch questions")
@@ -669,7 +669,7 @@ handleStartExam();
   // Fetch individual question (optional - for detailed view)
   const fetchIndividualQuestion = async (questionId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/questions/${questionId}`)
+      const response = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}/questions/${questionId}`)
       if (response.ok) {
         const questionData = await response.json()
         console.log("Individual question data:", questionData)
@@ -836,7 +836,7 @@ const handleSubmitExam = async () => {
     console.log("Submitting exam with data:", submissionData);
 
     // ✅ Call backend
-    const response = await fetch("http://localhost:5000/api/apply/submit-test", {
+    const response = await fetch("https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/apply/submit-test", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(submissionData),

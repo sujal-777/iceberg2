@@ -17,7 +17,7 @@ export default function PAGE() {
 
     const fetchTestSeries = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/exams/${examId}/test-series`);
+        const res = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/exams/${examId}/test-series`);
         const data = await res.json();
         setTestSeries(data);
       } catch (err) {

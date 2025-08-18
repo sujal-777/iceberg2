@@ -69,7 +69,7 @@ const handleSubmit = async () => {
       }
     });
 
-    const res = await fetch("http://localhost:5000/api/test-attempt/submit", {
+    const res = await fetch("https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-attempt/submit", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`, // ⬅️ Include token here
@@ -124,7 +124,7 @@ const handleSubmit = async () => {
     async function fetchQuestions() {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/test-series/${testSeriesId}/questions`
+          `https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}/questions`
         );
         const data = await res.json();
         const mcqs = data.filter(
@@ -530,7 +530,7 @@ const handleSubmit = async () => {
 //   useEffect(() => {
 //     async function fetchQuestions() {
 //       try {
-//         const res = await fetch(`http://localhost:5000/api/test-series/${testSeriesId}/questions`);
+//         const res = await fetch(`https://api-icebreg-back-git-f4697b-pratikpaliwal355-gmailcoms-projects.vercel.app/api/test-series/${testSeriesId}/questions`);
 //         const data = await res.json();
 //          const mcqs = data.filter(q => 'question' in q && !('questionPDF' in q));
 //         const descriptives = data.filter(q =>  'questionPDF' in q);
