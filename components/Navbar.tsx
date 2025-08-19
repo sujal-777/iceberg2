@@ -361,21 +361,23 @@ export default function Navbar() {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      {["ca", "cma", "cs"].map((type, index) => (
+                      {categories.map((type, index) => (
+                      // {["ca", "cma", "cs"].map((type, index) => (
                         <motion.div
-                          key={type}
+                          key={index}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: index * 0.05 }}
                         >
                           <Link
-                            href={`/test-series/${type}`}
+                            href={`/test-series/${type._id}`}
                             className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
                           >
-                            {type.toUpperCase()} Test Series
+                            {type.name} 
                           </Link>
                         </motion.div>
                       ))}
+                      
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
