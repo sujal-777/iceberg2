@@ -554,40 +554,82 @@ console.log(userId);
 
     console.log(testSeriesId , "new/attempt")
     // apply for test 
- const handleStartExam = async () => {
-  console.log(userId)
+//  const handleStartExam = async () => {
+//   console.log(userId)
 
- console.log(userId, 'User ID for exam attempt'); // Log user ID for debugging
-console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series ID for debugging
+//  console.log(userId, 'User ID for exam attempt'); // Log user ID for debugging
+// console.log(testSeriesId, 'Test Series ID for exam attempt'); // Log test series ID for debugging
+//   try {
+//     // 1. Get user email from backend using clerkId (userId here is ClerkId)
+//     const emailRes = await fetch(`https://icebreg-backend2.onrender.com/api/auth/get-email/${userId}`);
+//     const emailData = await emailRes.json();
+
+//     if (!emailData.email) {
+//       console.error("Email not found for this user");
+      
+//       return;
+//     }
+    
+// localStorage.setItem("user_Id", String(emailData.userId));
+// console.log("User _id:", emailData.userId);
+//     // 2. Apply for the test
+//     const applyRes = await fetch("https://icebreg-backend2.onrender.com/api/apply/apply-test", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         email: emailData.email,
+//         testId: testSeriesId, // ⚡ examId here should match your Test _id (not attempt id)
+//       }),
+//     });
+
+//     const applyData = await applyRes.json();
+//     console.log("Apply test response:", applyData);
+//   } catch (err) {
+//     console.error("Error in handleStartExam:", err);
+//   }
+// };
+const handleStartExam = async () => {
+  console.log(userId, "Clerk ID for exam attempt");
+  console.log(testSeriesId, "Test Series ID for exam attempt");
+
   try {
-    // 1. Get user email from backend using clerkId (userId here is ClerkId)
+    // 1. Get user email & MongoDB _id from backend using ClerkId
     const emailRes = await fetch(`https://icebreg-backend2.onrender.com/api/auth/get-email/${userId}`);
     const emailData = await emailRes.json();
 
-    if (!emailData.email) {
-      console.error("Email not found for this user");
-      
+    if (!emailData.email || !emailData.userId) {
+      console.error("Email or User _id not found for this user");
       return;
     }
-    
-localStorage.setItem("user_Id", String(emailData.userId));
-console.log("User _id:", emailData.userId);
-    // 2. Apply for the test
-    const applyRes = await fetch("https://icebreg-backend2.onrender.com/api/apply/apply-test", {
-      method: "POST",
+
+    // ✅ Store MongoDB User _id in localStorage for later usage
+    localStorage.setItem("user_Id", String(emailData.userId));
+    console.log("User _id (MongoDB):", emailData.userId);
+
+    // 2. Apply or update exam attempt
+    const applyRes = await fetch("https://icebreg-backend2.onrender.com/api/apply/examinations", {
+      method: "PUT", // ✅ use PUT since it handles both create & update
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: emailData.email,
-        testId: testSeriesId, // ⚡ examId here should match your Test _id (not attempt id)
+        userId: emailData.userId,   // MongoDB User _id
+        testSeriesId: testSeriesId, // Test _id
+        totalMarks: 100             // You can fetch this dynamically from Test if needed
       }),
     });
 
     const applyData = await applyRes.json();
-    console.log("Apply test response:", applyData);
+    console.log("Apply/Update exam response:", applyData);
+
+    if (applyRes.ok) {
+      console.log("Exam attempt ready for user:", emailData.userId);
+    } else {
+      console.error("Failed to start exam:", applyData.error);
+    }
   } catch (err) {
     console.error("Error in handleStartExam:", err);
   }
 };
+
 handleStartExam();
   // end apply for test 
     const fetchQuestions = async () => {
@@ -786,11 +828,11 @@ handleStartExam();
   //     console.log("Submitting exam with data:", submissionData)
 
   //     // Here you would typically send to your submission API
-  //     // const response = await fetch('/api/submit-exam', {
-  //     //   method: 'POST',
-  //     //   headers: { 'Content-Type': 'application/json' },
-  //     //   body: JSON.stringify(submissionData)
-  //     // })
+  //     const response = await fetch('https://icebreg-backend2.onrender.com/api/apply/submit-test', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(submissionData)
+  //     })
 
   //     toast({
   //       title: "Exam Submitted",
@@ -810,13 +852,72 @@ handleStartExam();
   //     setSubmitting(false)
   //   }
   // }
+// const handleSubmitExam = async () => {
+//   try {
+//     setSubmitting(true);
+
+//     // ✅ Get userId from localStorage
+//     const userId = localStorage.getItem("user_Id");
+
+//     if (!userId) {
+//       toast({
+//         title: "Error",
+//         description: "User ID not found. Please login again.",
+//         variant: "destructive",
+//       });
+//       return;
+//     }
+
+//     // ✅ Prepare submission JSON
+//     const submissionData = {
+//       userId,
+//       testId: testSeriesId, // using testSeriesId as your backend expects testId
+//       answers, // already an array of answers
+//     };
+
+//     console.log("Submitting exam with data:", submissionData);
+
+//     // ✅ Call backend
+//     const response = await fetch("https://icebreg-backend2.onrender.com/api/apply/submit-test", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(submissionData),
+//     });
+
+//     const result = await response.json();
+//     console.log("Submit response:", result);
+
+//     if (response.ok) {
+//       toast({
+//         title: "Exam Submitted",
+//         description: `Your exam has been submitted successfully! Score: ${result.score}`,
+//       });
+
+//       // Redirect to results page
+//       router.push(`/`)
+//     } else {
+//       toast({
+//         title: "Error",
+//         description: result.error || "Failed to submit exam.",
+//         variant: "destructive",
+//       });
+//     }
+//   } catch (error) {
+//     console.error("Submission error:", error);
+//     toast({
+//       title: "Error",
+//       description: "Failed to submit exam. Please try again.",
+//       variant: "destructive",
+//     });
+//   } finally {
+//     setSubmitting(false);
+//   }
+// };
 const handleSubmitExam = async () => {
   try {
     setSubmitting(true);
 
-    // ✅ Get userId from localStorage
     const userId = localStorage.getItem("user_Id");
-
     if (!userId) {
       toast({
         title: "Error",
@@ -826,21 +927,27 @@ const handleSubmitExam = async () => {
       return;
     }
 
-    // ✅ Prepare submission JSON
+    // ✅ Ensure answers is an array
+    const formattedAnswers = Array.isArray(answers)
+      ? answers
+      : Object.values(answers);
+
     const submissionData = {
       userId,
-      testId: testSeriesId, // using testSeriesId as your backend expects testId
-      answers, // already an array of answers
+      testId: testSeriesId, // make sure this is actually the Test _id
+      answers: formattedAnswers,
     };
 
     console.log("Submitting exam with data:", submissionData);
 
-    // ✅ Call backend
-    const response = await fetch("https://icebreg-backend2.onrender.com/api/apply/submit-test", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(submissionData),
-    });
+    const response = await fetch(
+      "https://icebreg-backend2.onrender.com/api/apply/submit-test",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submissionData),
+      }
+    );
 
     const result = await response.json();
     console.log("Submit response:", result);
@@ -851,8 +958,8 @@ const handleSubmitExam = async () => {
         description: `Your exam has been submitted successfully! Score: ${result.score}`,
       });
 
-      // Redirect to results page
-      router.push(`/`)
+      // 🔄 Redirect to results page
+      router.push(`/`);
     } else {
       toast({
         title: "Error",
