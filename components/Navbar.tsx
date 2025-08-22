@@ -352,6 +352,7 @@ export default function Navbar() {
                     <ChevronDown className="h-5 w-5" />
                   </motion.div>
                 </motion.button>
+
                 <AnimatePresence>
                   {isMobileTestDropdownOpen && (
                     <motion.div
@@ -361,29 +362,36 @@ export default function Navbar() {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      {["ca", "cma", "cs"].map((type, index) => (
+                      {categories.map((cat: any, index: number) => (
                         <motion.div
-                          key={type}
+                          key={cat._id}
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.3, delay: index * 0.05 }}
                         >
                           <Link
-                            href={`/test-series/${type}`}
+                            href={`/category/${cat._id}`}
                             className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
+                            onClick={() => setIsMobileTestDropdownOpen(false)}
                           >
-                            {type.toUpperCase()} Test Series
+                            {cat.name}
                           </Link>
                         </motion.div>
                       ))}
+
+                      {/* Extra static item if needed */}
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: 0.15 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: categories.length * 0.05,
+                        }}
                       >
                         <Link
                           href="/test-series/free-mock-test"
                           className="block px-4 py-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 transition-all duration-300 rounded-md"
+                          onClick={() => setIsMobileTestDropdownOpen(false)}
                         >
                           Free Mock Test
                         </Link>
@@ -392,6 +400,7 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
+
               <MobileNavLink href="/counseling" text="Counseling" />
               <MobileNavLink href="/blog" text="Blog" />
               <MobileNavLink href="/lecture" text="Concept Videos" />
@@ -446,6 +455,7 @@ export default function Navbar() {
                   >
                     Log in
                   </motion.button>
+
                 </SignInButton>
                 <SignUpButton mode="modal">
                   <motion.button
@@ -480,7 +490,15 @@ export default function Navbar() {
                       👋 Welcome, {user.firstName}
                     </motion.span>
                   )}
-                  <UserButton afterSignOutUrl="/" />
+                  <UserButton>
+                  <UserButton.MenuItems>
+                    <UserButton.Link
+                      label="Dashboard"
+                      labelIcon={<FiHome />}
+                      href="/dashboard"
+                    />
+                  </UserButton.MenuItems>
+                </UserButton>
                 </motion.div>
               </SignedIn>
             </motion.div>
